@@ -1,0 +1,23 @@
+<!-- money article start -->
+<!-- item start -->
+<ul *ngIf='loadingUrl' class="rsvp_secondary_lisiting">
+    <li class="rsvp_money_article">
+        <a [routerLink]="['/article', item?.DestArticleID]">
+            <div class="rsvp_play_wrapper">
+                <img [src]="loadingUrl" [alt]="item?.MediaStockImageAlt" (load)="imageLoaded()" />
+                <div class="rsvp_icon_play_outer" *ngIf="item?.VideoID">
+                    <div class="rsvp_icon_play"></div>
+                </div>
+            </div>
+            <div class="rsvp_money_article_content">
+                <div class="rsvp_feed_cat_color rsvp_cat2" [style.background-color]='item?.StripeColor'></div>
+                <div style="clear:both;"></div>
+                <div class="rsvp_money_article_title oedooprom">{{item?.Title}}</div>
+            </div>
+            <div style="clear:both;"></div>
+        </a>
+        <div style="clear:both;"></div>
+    </li>
+    <!-- item end -->
+    <!-- money article end -->
+</ul>

@@ -1,0 +1,17 @@
+<!--  twitter widget start here  -->
+<div *ngIf='_isVisible'>
+    <div style="clear:both;"></div>
+    <div class="rsvp_twitter_widget" [ngStyle]="{'bottom': '-35px', 'position': 'fixed', 'z-index': '1000', 'background-color': 'rgba(255, 255, 255, 1)', 'border-top': '1px solid #d8d8d8' }">
+        <!--<div class="rsvp_twitter_right" [routerLink]="['/twitter']" [@openClose]="animationState" [ngStyle]="{ 'background-color': 'rgba(255, 255, 255, 1)', 'border-top': '1px solid #d8d8d8', 'position': 'relative' }">-->
+        <div class="rsvp_twitter_right" [routerLink]="['/twitter']" id='twiiterItemUn' [ngStyle]="{ 'background-color': 'rgba(255, 255, 255, 1)', 'position': 'relative', 'width': '90%' }">
+            <img src="./../../../../assets/icons/twitter_bird.png" />
+            <span>{{_currentItem?.TimeBefore}}</span> {{_currentItem?.TitleTrimed}}
+        </div>
+        <a class="rsvp_twitter_button" (click)="getNext()" [ngStyle]="{ 'float': 'left' }">
+            <img src=" ./../../../../assets/icons/twitter_left.png " />
+        </a>
+        <div style="clear:both; "></div>
+    </div>
+    <div style="clear:both; "></div>
+</div>
+<!--  twitter widget end here  -->

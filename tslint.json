@@ -28,6 +28,7 @@
     "use-life-cycle-interface": true,
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
+    "curly": false,
     // General
     "no-console": [true,
       "time",
@@ -36,12 +37,14 @@
     ],
     "max-line-length": [
       true,
-      100
+      180
     ],
     "no-string-literal": false,
     "no-use-before-declare": true,
-    "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "object-literal-sort-keys":false,
+    "ordered-imports":[
+      false
+    ],
     "quotemark": [
       true,
       "single",

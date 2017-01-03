@@ -1,12 +1,8 @@
+
 // Angular 2
-import {
-  enableDebugTools,
-  disableDebugTools
-} from '@angular/platform-browser';
-import {
-  ApplicationRef,
-  enableProdMode
-} from '@angular/core';
+// rc2 workaround
+import { enableDebugTools, disableDebugTools } from '@angular/platform-browser';
+import { enableProdMode, ApplicationRef } from '@angular/core';
 // Environment Providers
 let PROVIDERS: any[] = [
   // common env directives
@@ -17,14 +13,9 @@ let PROVIDERS: any[] = [
 let _decorateModuleRef = <T>(value: T): T => { return value; };
 
 if ('production' === ENV) {
-  enableProdMode();
-
   // Production
-  _decorateModuleRef = (modRef: any) => {
-    disableDebugTools();
-
-    return modRef;
-  };
+  disableDebugTools();
+  enableProdMode();
 
   PROVIDERS = [
     ...PROVIDERS,

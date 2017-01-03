@@ -1,3 +1,4 @@
+declare var $nana: any;
 /*
  * Custom Type Definitions
  * When including 3rd party modules you also need to include the type definition for the module
@@ -46,20 +47,15 @@ import * as _ from 'lodash'
 // support NodeJS modules without type definitions
 declare module '*';
 
-/*
-// for legacy tslint etc to understand rename 'modern-lru' with your package
-// then comment out `declare module '*';`. For each new module copy/paste
-// this method of creating an `any` module type definition
-declare module 'modern-lru' {
-  let x: any;
-  export = x;
-}
-*/
-
 // Extra variables that live on Global that will be replaced by webpack DefinePlugin
 declare var ENV: string;
 declare var HMR: boolean;
 declare var System: SystemJS;
+
+
+interface Window { angularComponentRef : any; }
+interface Window { angularComponentNav : any; }
+
 
 interface SystemJS {
   import: (path?: string) => Promise<any>;
@@ -86,6 +82,7 @@ type AsyncRoutes = {
                          FactoryPromise
 };
 
+
 type IdleCallbacks = Es6PromiseLoader |
                              Function |
               FactoryEs6PromiseLoader |
@@ -107,6 +104,7 @@ interface WebpackModule {
   };
 }
 
+
 interface WebpackRequire {
     (id: string): any;
     (paths: string[], callback: (...modules: any[]) => void): void;
@@ -121,6 +119,7 @@ interface WebpackContext extends WebpackRequire {
 interface ErrorStackTraceLimit {
   stackTraceLimit: number;
 }
+
 
 // Extend typings
 interface NodeRequire extends WebpackRequire {}

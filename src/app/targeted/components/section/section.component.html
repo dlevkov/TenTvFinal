@@ -1,0 +1,17 @@
+<div id="SectionMainContainer">
+
+    <div class="rsvp_image_with_caption" *ngIf="item?.IconURL2">
+        <a [routerLink]="['article_gallery.html']"></a>
+        <img [src]='item?.ImageFile' alt="">
+    </div>
+    <div id="ArticleListContainer">
+        <div *ngFor="let headline of item?.Headlines">
+            <dfp *ngIf="headline?.DisplayOrder !== 0 && headline?.DisplayOrder%4 === 0" [placeHolderId]='"ad-div-upper-strip-" + headline?.DisplayOrder' [dfpId]='generateDfpId(headline?.DisplayOrder)' [dfpStyle]='{"width":"320px", "margin":"0 auto","margin-top":"10px","margin-bottom":"10px", "background-color":"transparent"}'
+                [dfpObjectName]='"main"'></dfp>
+            <headline-big [item]='headline' *ngIf="headline?.DisplayOrder%4 === 0"></headline-big>
+            <headline-small [item]='headline' *ngIf='headline?.DisplayOrder%4 !== 0'></headline-small>
+
+        </div>
+    </div>
+    <tag-manager></tag-manager>
+</div>

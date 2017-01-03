@@ -1,0 +1,13 @@
+<div *ngIf='item' class="rsvp_article_inner_content">
+    <div class='paragraphContentWraper'>
+        <div [innerHTML]='safeHtml'></div>
+    </div>
+    <div style="clear:both;"></div>
+    <div *ngIf='item?.DisplayOrder!==1 && item?.PicMediaStockImageID' class="rsvp_image_with_caption">
+        <!--<a href="article_gallery.html" class="rsvp_imag_expand"></a>-->
+        <img [src]="_loadingUrl" [alt]="item?.PicMediaStockImageAlt" />
+
+        <p class="oedoopror">{{item?.PicMediaStockImageAlt}} צילום: {{item?.PicMediaStockImageCredit}}</p>
+    </div>
+    <div style="clear:both;"></div>
+</div>

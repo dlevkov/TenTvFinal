@@ -1,0 +1,30 @@
+<ul class="rsvp_feed_double" [ngStyle]="{'display': 'inline-block'}">
+	<li>
+		<a [routerLink]="['/article', item?.DestArticleID]">
+			<div class="rsvp_play_wrapper" style="width:100%;">
+				<img [src]="loadingUrl" [alt]="item?.MediaStockImageAlt" (load)="imageLoaded()"/>
+				<div class="rsvp_icon_play_outer" *ngIf="item?.VideoID > 0">
+					<div class="rsvp_icon_play"></div>
+				</div>
+
+			</div>
+			<div style="clear:both;"></div>
+			<div class="rsvp_feed_cat_color rsvp_cat1" [style.background-color]='item?.StripeColor'></div>
+			<div class="rsvp_feed_double_title oedooprom">{{item?.Title}}</div>
+		</a>
+	</li>
+    <li>
+		<a [routerLink]="['/article', nextItem?.DestArticleID]">
+			<div class="rsvp_play_wrapper" style="width:100%;">
+				<img [src]="loadingUrlNext" [alt]="nextItem?.MediaStockImageAlt" (load)="imageLoaded()"/>
+				<div class="rsvp_icon_play_outer" *ngIf="nextItem?.VideoID > 0">
+					<div class="rsvp_icon_play"></div>
+				</div>
+
+			</div>
+			<div style="clear:both;"></div>
+			<div class="rsvp_feed_cat_color rsvp_cat1" [style.background-color]='nextItem?.StripeColor'></div>
+			<div class="rsvp_feed_double_title oedooprom">{{nextItem?.Title}}</div>
+		</a>
+	</li>
+</ul>

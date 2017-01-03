@@ -1,0 +1,43 @@
+ @font-face {
+     font-family: 'OEDooPro-Book';
+     src: url('../fonts/OEDooPro-Book.eot');
+     src: url('../fonts/OEDooPro-Book.eot?#iefix') format('embedded-opentype'), url('../fonts/OEDooPro-Book.woff2') format('woff2'), url('../fonts/OEDooPro-Book.woff') format('woff');
+     font-weight: normal;
+     font-style: normal
+ }
+ 
+ @font-face {
+     font-family: 'OEDooPro-Regular';
+     src: url('../fonts/OEDooPro-Regular.eot');
+     src: url('../fonts/OEDooPro-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/OEDooPro-Regular.woff2') format('woff2'), url('../fonts/OEDooPro-Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal
+ }
+ 
+ @font-face {
+     font-family: 'OEDooPro-Medium';
+     src: url('../fonts/OEDooPro-Medium.eot');
+     src: url('../fonts/OEDooPro-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/OEDooPro-Medium.woff2') format('woff2'), url('../fonts/OEDooPro-Medium.woff') format('woff');
+     font-weight: normal;
+     font-style: normal
+ }
+ 
+ @font-face {
+     font-family: 'OEDooPro-Bold';
+     src: url('../fonts/OEDooPro-Bold.eot');
+     src: url('../fonts/OEDooPro-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/OEDooPro-Bold.woff2') format('woff2'), url('../fonts/OEDooPro-Bold.woff') format('woff');
+     font-weight: normal;
+     font-style: normal
+ }
+ 
+ .oedoopror {
+     font-family: 'OEDooPro-Regular', arial;
+ }
+ 
+ .oedooprom {
+     font-family: 'OEDooPro-Medium', arial;
+ }
+ 
+ .oedooprob {
+     font-family: 'OEDooPro-Bold', arial;
+ }

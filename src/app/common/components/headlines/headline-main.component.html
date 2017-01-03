@@ -1,0 +1,16 @@
+<!-- main article start -->
+<div style="clear:both;"></div>
+<div class="rsvp_main_article" [ngStyle]="{'margin-bottom': '12px'}">
+    <a [routerLink]="['/article', item?.DestArticleID]">
+        <div class="mainHeadlineClass"></div>
+        <img [src]="loadingUrl" [alt]="item?.MediaStockImageAlt" (load)="imageLoaded()"/>
+        <div class="rsvp_main_article_content">
+            <div class="oedooprob rsvp_main_article_cat">{{item?.PrimeTag}}</div>
+            <div style="clear:both;"></div>
+            <h2 class="oedooprom">{{item?.Title}}</h2>
+        </div>
+    </a>
+    <div style="clear:both;"></div>
+</div>
+<div style="clear:both;"></div>
+<!-- main article end -->

@@ -1,0 +1,9 @@
+<a class="rsvp_feed_filter_prom" (click)='toggleFilter()'>
+    <img src="assets/icons/filtericon.png" alt="filter" />
+    <span>ערוך את ערוצי התוכן</span>
+</a>
+<div id="articleList"></div>
+<div *ngFor="let item of items; let i=index;">
+    <headline-small [item]='item.Headline'></headline-small>
+    <dfp *ngIf="isDfp(i)" [placeHolderId]='"ad-div-upper-strip-" + i + seed' [dfpId]='generateDfpId(i)' [dfpStyle]='{"width":"320px","margin":"0 auto","margin-top":"10px","margin-bottom":"10px", "background-color":"transparent"}' [dfpObjectName]='"main"'></dfp>
+</div>

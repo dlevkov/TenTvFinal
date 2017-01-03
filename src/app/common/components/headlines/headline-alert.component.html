@@ -1,0 +1,16 @@
+<div [class]='getItemClass()'>
+    <ul class="rsvp_main_article_updates_items">
+        <li>
+            <a [routerLink]="['/article', item.DestArticleID]">
+                <div class="rsvp_feed_cat_color rsvp_cat1" [style.background-color]='item?.StripeColor'></div>
+                <div style="clear:both;"></div>
+                <div class="rsvp_main_article_updates_row">
+                    <div class="rsvp_main_article_updates_item_time oedoopror">{{ _lastModifiedTime }}</div>
+                    <div class="rsvp_main_article_updates_item_title oedooprom">{{item?.Title}}</div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div style="clear:both;"></div>
+            </a>
+        </li>
+    </ul>
+</div>

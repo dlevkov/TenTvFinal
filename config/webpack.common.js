@@ -143,7 +143,7 @@ module.exports = function (options) {
         /* File loader for supporting images, for example, in CSS files.
          */
         {
-          test: /\.(jpg|png|gif)$/,
+          test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
           use: 'file-loader'
         },
 
@@ -218,8 +218,7 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
+        { from: 'src/assets', to: 'assets' }
       ]),
 
 
