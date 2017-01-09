@@ -7,11 +7,27 @@ import { Constants } from '../../Constants';
 
 @Component({
     selector: 'twitter-toolbar',
-    templateUrl: 'twitter-toolbar.component.html'
+    templateUrl: 'twitter-toolbar.component.html',
+    styles: [`
+        .rsvp_twitter_widget { 
+            bottom: -35px;
+            position: fixed;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 1);
+            border-top: 1px solid #d8d8d8'
+            }
+        #twiiterItemUn {
+            background-color: rgba(255, 255, 255, 1);
+            position: relative;
+            width: 90%; 
+        }
+        .rsvp_twitter_button{
+            float: left
+        }
+    `]
 })
 export class TwitterToolbarComponent implements OnInit, OnDestroy {
     items: TwitterModel[];
-    animationState: string = 'collapsed';
     public _currentItem: TwitterModel;
     public _currentId: number;
     public _service: TwitterService;
@@ -76,7 +92,7 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
         $nana('#twiiterItemUn').hide('slide', {
             direction: 'down'
         }, 400);
-        window.setTimeout(function () {
+        window.setTimeout( () => {
             $nana('#twiiterItemUn').show('slide', {
                 direction: 'up'
             }, 700);
