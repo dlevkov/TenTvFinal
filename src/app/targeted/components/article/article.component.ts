@@ -50,6 +50,7 @@ export class ArticleComponent implements OnDestroy, AfterViewChecked {
        // this.animateTransition();
     }
 
+    //
     private animateTransition() {
         let elem = this.myElement.nativeElement;
         elem.classList.remove('load-image-show');
