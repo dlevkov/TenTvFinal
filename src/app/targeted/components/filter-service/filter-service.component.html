@@ -2,8 +2,10 @@
   <div class="rsvp_filter_outer">
     <div class="rsvp_filter_outer2">
       <!--<div class="rsvp_filter_outer3">
-        <div class="rsvp_filter_title">מה מעניין אותך?
-          <a (click)="toggleclearFilter()" id="rsvp_toggle_clear" class="rsvp_clear_filter_toggle rsvp_clear" data-clear="נקה הכל">{{clearFilterTextGet()}}</a>
+        <div class="rsvp_filter_title">
+          לתצוגת פיד מותאם אישית,
+          <div style="clear:both;"></div>
+          בחרו ערוצי תוכן מועדפים
         </div>
         <div style="clear:both;"></div>
         <div class="rsvp_filter_list">
@@ -16,9 +18,8 @@
           <div style="clear:both;"></div>
         </div>
         <div class="rsvp_update_feed_prom_outer">
-          <a class="rsvp_update_feed_prom" [ngStyle]="_updateButtonStyle" (click)='Redirect()'>
-				עדכן פיד מותאם אישית
-				</a>
+          <a class="rsvp_update_feed_prom" [ngStyle]="_updateButtonStyle" (click)='Redirect()'>עדכן פיד</a>
+          <a (click)="toggleclearFilter()" id="rsvp_toggle_clear" class="rsvp_clear_filter_toggle rsvp_clear" data-clear="נקה הכל">{{clearFilterTextGet()}}</a>
         </div>
         <div style="clear:both;"></div>
       </div>-->

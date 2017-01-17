@@ -17,7 +17,6 @@
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#001a1a1a', endColorstr='#b31a1a1a', GradientType=0);
 }
 
-
 .load-image-hidden {
   visibility: hidden;
   opacity: 0;
@@ -29,4 +28,56 @@
   opacity: 1;
   display: block;
   transition: visibility 0s 200, opacity 200 linear;
+}
+
+#filter-confirmation-wrapper {
+  vertical-align: top;
+  position: absolute;
+  border: 1px solid #d8d8d8;
+  background-color: #ebebeb;
+  width: calc(100% - 20px);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.filter-confirmation-upperText {
+  font-family: 'OEDooPro-Medium';
+  font-size: 32px;
+  line-height: 36px;
+  color: #ff2929;
+  margin-top: 72px;
+}
+
+.filter-confirmation-icon {
+  background: url('../icons/filter-pictogram.png') no-repeat;
+  min-width: 197px;
+  min-height: 202px;
+  background-position: center;
+  margin-top: 72px;
+}
+
+.filter-confirmation-lowerText {
+  font-family: 'OEDooPro-Medium';
+  font-size: 32px;
+  line-height: 36px;
+  color: #ff2929;
+  margin-top: 72px;
+}
+
+.filter-confirmation-button {
+  font-family: 'OEDooPro-Bold';
+  font-size: 24px;
+  color: #ff2929;
+  width: 200px;
+  height: 60px;
+  margin-top: 72px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px;
+  border-color: #ff2929;
+  border-style: solid;
+  line-height: normal;
+  padding-top: 16px;
 }

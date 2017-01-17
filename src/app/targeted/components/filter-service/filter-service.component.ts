@@ -8,6 +8,7 @@ import { MainModel } from '../../../targeted/models/main.model';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookies } from '../../../common/Cookies';
+import { FilterConfirmation } from './filter-confirmation.component';
 
 @Component({
     selector: 'filter-service',

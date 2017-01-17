@@ -46,7 +46,7 @@ import { GoogleTagManager } from '../app/common/components/3rdParty/googleTagMan
 
 import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
-
+import { FilterConfirmation } from './targeted/components/filter-service/filter-confirmation.component';
 // Cookies, based on this package
 import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
@@ -90,6 +90,7 @@ type StoreType = {
     ArticlesListComponent,
     FilterServiceComponent,
     FilterServiceItemComponent,
+    FilterConfirmation,
     Video,
     Controller,
     GoogleTagManager
