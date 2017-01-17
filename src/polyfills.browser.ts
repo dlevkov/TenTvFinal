@@ -32,6 +32,12 @@ import 'zone.js/dist/zone';
 // Typescript emit helpers polyfill
 import 'ts-helpers';
 
+// Angular 2 animation support on Safari and IE
+import 'web-animations-js/web-animations.min';
+
+// angular2 cookie
+import 'angular2-cookie/core';
+
 if ('production' === ENV) {
   // Production
 

@@ -1,18 +1,20 @@
-import { Component, OnInit, Input, NgZone, OnChanges, OnDestroy } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
+import { MainModel } from '../../models/main.model';
+import { Component, OnInit, Input, NgZone, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Cookies } from '../../../common/Cookies';
 import { MainService } from '../../services/main.service';
 import { HeadlineModel } from '../../../common/models/headline.model';
-import { MainModel } from '../../../targeted/models/main.model';
 import { FilterServiceComponent } from '../filter-service/filter-service.component';
+
 
 @Component({
     selector: 'main',
     templateUrl: 'main.component.html'
 })
-export class MainComponent implements OnInit, OnChanges, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
     @Input() public showTwitter: boolean = true;
     @Input() public isInArticle: boolean = false;
     public seed: string;
@@ -21,9 +23,11 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
     public isFiltered: boolean = false;
     public _service: MainService;
     public _subscriber: Subscription;
+    private _cookie: Cookies;
 
-    constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute) {
+    constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
         this._service = new MainService(this.http);
+        this._cookie = new Cookies(cookieService);
     }
 
     public generateDfpId(): number {
@@ -32,10 +36,6 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
 
     public addCounter(): void {
         this.DfpId++;
-    }
-
-    public ngOnChanges(changes) {
-        this.seed = new Date().getMilliseconds().toString();
     }
 
     public ngOnInit() {
@@ -55,7 +55,7 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
     public getItems() {
         this._subscriber = this._service
             .GetItemsByUri('TenTvAppFront/main?%24orderby=DisplayOrder%20asc')
-            .subscribe(data => {
+            .subscribe((data) => {
                 this.item = data;
                 this.item.isFiltered = this.isFiltered;
             });
@@ -64,15 +64,11 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
         window['AdUnitsCollectionIndex'].reset();
-        console.log('main dtor');
     }
 
     public initFilter() {
-        Cookies.getNanaCookie();
-        if (Cookies.nanaFilterSids.length > 0 && Cookies.nanaFilterSids.length !== FilterServiceComponent.filterServices.length) {
-            this.isFiltered = true;
-        } else
-        { this.isFiltered = false; }
+        let ids: number[] = this._cookie.getNanaCookie();
+        this.isFiltered = (ids.length > 0 && ids.length !== FilterServiceComponent.filterServices.length) ? true : false;
     }
 
     public handleFilter() {
