@@ -16,8 +16,9 @@ export class WebApiErrorLogger implements OnDestroy {
     }
 
     public Log(title: string, message: any) {
-        if (!this._subscriber)
-            this._subscriber = this.sendMessage(message).subscribe();
+        console.log('title:' + ',message:' + message);
+        // if (!this._subscriber)
+        //this._subscriber = this.sendMessage(message).subscribe();
     }
     public sendMessage(message: string): Observable<any> {
         return this._http.get(this._dataDomain + 'TenTvAppFront/errorlog?ErrorDesc=' + '{' + decodeURI(message) + '}')

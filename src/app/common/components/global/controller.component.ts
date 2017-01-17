@@ -1,4 +1,5 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
+import { Component, Input, NgZone, OnInit, style, ViewContainerRef } from '@angular/core';
 import { PubSubService } from '../../Global/PubSubService';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,8 +13,9 @@ export class Controller implements OnInit {
     private _routeSubscriber: Subscription;
     private _isVisible: boolean = true;
     private _nanaRouteRef: any;
+    private _dom = new BrowserDomAdapter();
 
-    constructor(/*private pubSubService: PubSubService,**/ private _router: Router, private _ngZone: NgZone, private _location: Location) {
+    constructor(private _router: Router, private _ngZone: NgZone, private _location: Location, private viewContainer: ViewContainerRef) {
         window.angularComponentRef = { component: this, zone: _ngZone };
         window.angularComponentNav = { component: this, zone: _ngZone };
 
@@ -32,18 +34,18 @@ export class Controller implements OnInit {
             });
     }
 
-
-    ngOnInit() {
-        $nana('#nanaLoader').fadeOut(300);
+    public ngOnInit() {
+        let elem = document.getElementById('nanaLoader');
+        elem.classList.add('load-image-hidden');
     }
 
-    getRouteUrl(data: String) {
+    public getRouteUrl(data: String) {
         this._ngZone.run(() => {
             this.setVisible();
         });
     }
 
-    navigateBack(data: string) {
+    public navigateBack(data: string) {
         this._ngZone.run(() => {
             window.scrollTo(0, 0);
             this._location.back(); // in HTML5 window.history.back(); works fine
@@ -62,7 +64,6 @@ export class Controller implements OnInit {
     private isSection(url: string) {
         return url.search('section') >= 0;
     }
-
 
     private setVisible() {
         this._isVisible = true;

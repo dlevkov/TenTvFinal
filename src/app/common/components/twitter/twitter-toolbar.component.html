@@ -2,7 +2,7 @@
 <div *ngIf='_isVisible'>
     <div style="clear:both;"></div>
     <div class="rsvp_twitter_widget">
-        <div class="rsvp_twitter_right" [routerLink]="['/twitter']" id='twiiterItemUn'>
+        <div class="rsvp_twitter_right" [routerLink]="['/twitter']" id='twiiterItemUn' [@animationTrigger]='animationState'>
             <img src="./../../../../assets/icons/twitter_bird.png" />
             <span>{{_currentItem?.TimeBefore}}</span> {{_currentItem?.TitleTrimed}}
         </div>

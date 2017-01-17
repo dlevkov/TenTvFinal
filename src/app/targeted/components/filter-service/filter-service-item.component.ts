@@ -7,10 +7,10 @@ import { FilterServiceModel } from '../../../common/models/filter-service.model'
     templateUrl: 'filter-service-item.component.html'
 })
 export class FilterServiceItemComponent {
-    @Input() item: FilterServiceModel;
-    @Output() itemChecked = new EventEmitter();
+    @Input()public item: FilterServiceModel;
+    @Output()public itemChecked = new EventEmitter();
 
-    handleClick() {
+    public handleClick() {
         this.itemChecked.emit();
         console.log('child click');
 

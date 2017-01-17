@@ -11,15 +11,15 @@ export class HeadlineBase {
         this._myElem = myElement;
         this._rect = this._myElem.nativeElement.getBoundingClientRect();
     }
-    loadUrl(mediaImageId: number, currentImageType: ImageTypes, mediaImageIdNext: number = 0) {
-        //$nana(this._myElem.nativeElement).find('img').fadeTo(500, 0.01); // hide
+    public loadUrl(mediaImageId: number, currentImageType: ImageTypes, mediaImageIdNext: number = 0) {
+        $nana(this._myElem.nativeElement).find('img').fadeTo(500, 0.01); // hide
 
         if (mediaImageId != null)
             this.item.loadingUrl = Constants.GetImagePathByType(mediaImageId, currentImageType);
         if (mediaImageIdNext > 0)
             this.item.loadingUrlNext = Constants.GetImagePathByType(mediaImageIdNext, currentImageType);
 
-        //$nana(this._myElem.nativeElement).find('img').delay(700).fadeTo(300, 1); // show
+        $nana(this._myElem.nativeElement).find('img').delay(700).fadeTo(300, 1); // show
     }
     public isVisible() {
         const rect = this._rect;
@@ -42,6 +42,7 @@ export class HeadlineBase {
         );
     }
 }
+// tslint:disable-next-line:max-classes-per-file
 export class CustomBaseModel {
     public loadingUrl: string = Constants.IMAGE_LOADING_URL16_9;
     public loadingUrlNext: string = Constants.IMAGE_LOADING_URL16_9;

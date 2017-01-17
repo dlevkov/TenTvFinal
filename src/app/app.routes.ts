@@ -10,7 +10,7 @@ import { FilterServiceComponent } from './targeted/components/filter-service/fil
 
 
 export const ROUTES: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
   { path: 'mainfiltered/:id', component: MainComponent },
   { path: 'article-list', component: ArticlesListComponent },

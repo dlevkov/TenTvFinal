@@ -46,13 +46,15 @@ import { GoogleTagManager } from '../app/common/components/3rdParty/googleTagMan
 
 import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
-// import { CookieService } from 'angular2-cookie/core';
-// import { CookieOptions } from 'angular2-cookie/core';
+
+// Cookies, based on this package
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  CookieService
 ];
 
 type StoreType = {
@@ -100,8 +102,9 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS ,
+    APP_PROVIDERS,
     { provide: ErrorHandler, useClass: CustomErrorHandler },
+    { provide: CookieOptions, useValue: {} },
     WebApiErrorLogger
   ]
 })
