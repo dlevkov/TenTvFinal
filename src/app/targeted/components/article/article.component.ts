@@ -1,4 +1,4 @@
-import { Subscription } from '../../../../../node_modules/rxjs/src/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
 import { Component, OnDestroy, ElementRef, NgZone } from '@angular/core';
 import { Http } from '@angular/http';
