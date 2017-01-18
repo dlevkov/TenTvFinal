@@ -11,7 +11,7 @@ import { GoogleTagManager } from '../../../common/components/3rdParty/googleTagM
     templateUrl: 'section.component.html'
 })
 export class SectionComponent implements OnInit, OnDestroy {
-    item: SectionModel;
+    public item: SectionModel;
 
     private _currentId: number;
     private _service: SectionService;
@@ -22,23 +22,23 @@ export class SectionComponent implements OnInit, OnDestroy {
         this._service = new SectionService(http);
     }
 
-    generateDfpId(i: number): number {
+    public generateDfpId(i: number): number {
         return Math.floor(i / 4);
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this._currentId = +this.route.snapshot.params['id'];
         this.getItems();
     }
 
-    getItems() {
+    public getItems() {
         this._subscriber = this._service
             .GetItemsByUri('TenTvAppFront/sectionBy/' + this._currentId + '?%24orderby=DisplayOrder%20desc')
-            .subscribe(data => {
+            .subscribe((data) => {
                 this.item = data;
             });
     }
-    ngOnDestroy() {
+    public ngOnDestroy() {
         this._subscriber.unsubscribe();
     }
 }
