@@ -1,14 +1,24 @@
-import { CookieService } from 'angular2-cookie/core';
-import { Component, OnInit, OnDestroy, NgZone, Input, ElementRef, trigger, state, style, animate, transition } from '@angular/core';
-import { FilterServiceModel } from '../../../common/models/filter-service.model';
 import { Constants } from '../../../common/Constants';
-import { Subscription } from 'rxjs/Subscription';
-import { FilterServiceService } from '../../services/filter-service.service';
-import { MainModel } from '../../../targeted/models/main.model';
-import { Http } from '@angular/http';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Cookies } from '../../../common/Cookies';
-import { FilterConfirmation } from './filter-confirmation.component';
+import { FilterServiceModel } from '../../../common/models/filter-service.model';
+import { MainModel } from '../../../targeted/models/main.model';
+import { FilterServiceService } from '../../services/filter-service.service';
+import {
+    animate,
+    Component,
+    ElementRef,
+    Input,
+    NgZone,
+    OnInit,
+    state,
+    style,
+    transition,
+    trigger
+} from '@angular/core';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'filter-service',

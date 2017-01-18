@@ -8,7 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FilterConfirmation {
     @Output() public close: EventEmitter<any> = new EventEmitter();
-    private Close() {
+    public Close() {
         this.close.emit(null);
     }
 }
