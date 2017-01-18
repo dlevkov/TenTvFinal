@@ -17,7 +17,7 @@ export class Constants {
     public static readonly DFPADUNITSNAMES: any = Constants.InitDfpAdUnitsName();
     public static readonly DFPLOADINGTIMEOUT: number = 1000;
     public static readonly TWITTERTICKERINTERVAL: number = 10000;
-    public static readonly FILTERCOOKIENAME: string = 'tentvappfilter';
+    public static readonly FILTERCOOKIENAME: string = 'tentvapp';
 
 
     public static InitHeadlineTypes(): any {
