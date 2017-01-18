@@ -44,40 +44,46 @@
 
 .filter-confirmation-upperText {
   font-family: 'OEDooPro-Medium';
-  font-size: 32px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 18px;
   color: #ff2929;
-  margin-top: 72px;
+  margin-top: 36px;
 }
 
 .filter-confirmation-icon {
-  background: url('../icons/filter-pictogram.png') no-repeat;
-  min-width: 197px;
-  min-height: 202px;
-  background-position: center;
-  margin-top: 72px;
+  background-image: url('../icons/filter-pictogram.png');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  margin-top: 36px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filter-confirmation-lowerText {
   font-family: 'OEDooPro-Medium';
-  font-size: 32px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 18px;
   color: #ff2929;
-  margin-top: 72px;
+  margin-top: 36px;
 }
 
 .filter-confirmation-button {
   font-family: 'OEDooPro-Bold';
-  font-size: 24px;
+  font-size: 12px;
   color: #ff2929;
-  width: 200px;
-  height: 60px;
-  margin-top: 72px;
+  width: 100px;
+  height: 30px;
+  margin-top: 36px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 36px;
   border: 2px;
   border-color: #ff2929;
   border-style: solid;
   line-height: normal;
-  padding-top: 16px;
+  padding-top: 5px;
 }

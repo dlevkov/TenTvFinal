@@ -58,6 +58,7 @@ export class FilterServiceComponent implements OnInit {
         this._sids = v;
     }
     public visibility = 'hidden';
+    public confirm = false;
     public _items: FilterServiceModel[];
     public _loadingUrl = Constants.IMAGE_LOADING_URL16_9;
     public _service: FilterServiceService;
@@ -92,6 +93,7 @@ export class FilterServiceComponent implements OnInit {
     public toggleFilter() {
         this._ngZone.run(() => {
             this.toggleVisibility(); // show or hide
+            this.confirm = false; // hide confirmation
         });
     }
 
@@ -123,6 +125,13 @@ export class FilterServiceComponent implements OnInit {
     }
 
     public Redirect() {
+        this.confirm = true;
+    }
+    public getId() {
+        this._cookie.setNanaCookie(this._sids);
+    }
+
+    private onClose(event) {
         this.toggleVisibility();
         this.mainModel.setFiltered();
         this.getChecked();
@@ -132,10 +141,6 @@ export class FilterServiceComponent implements OnInit {
             this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else
             this._router.navigate(['/']);
     }
-    public getId() {
-        this._cookie.setNanaCookie(this._sids);
-    }
-
     private getCookieData() {
         this._sids = this._cookie.getNanaCookie();
     }

@@ -1,7 +1,7 @@
 <div class="rsvp_filter" [@visibilityChanged]="visibility">
   <div class="rsvp_filter_outer">
     <div class="rsvp_filter_outer2">
-      <!--<div class="rsvp_filter_outer3">
+      <div class="rsvp_filter_outer3" *ngIf="!confirm">
         <div class="rsvp_filter_title">
           לתצוגת פיד מותאם אישית,
           <div style="clear:both;"></div>
@@ -22,8 +22,8 @@
           <a (click)="toggleclearFilter()" id="rsvp_toggle_clear" class="rsvp_clear_filter_toggle rsvp_clear" data-clear="נקה הכל">{{clearFilterTextGet()}}</a>
         </div>
         <div style="clear:both;"></div>
-      </div>-->
-      <filter-confirmation></filter-confirmation>
+      </div>
+      <filter-confirmation *ngIf="confirm" (close)="onClose($event)"></filter-confirmation>
       <div style="clear:both;"></div>
     </div>
     <div style="clear:both;"></div>
