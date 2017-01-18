@@ -25,7 +25,15 @@ import { FilterConfirmation } from './filter-confirmation.component';
             })),
             transition('shown => hidden', animate('400ms')),
             transition('hidden => shown', animate('300ms'))
-        ])
+        ]),
+        trigger(
+            'confirmationAnimation', [
+                transition(':enter', [
+                    style({ transform: 'translateY(-100%)', opacity: 0 }),
+                    animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
+                ])
+            ]
+        )
     ]
 })
 export class FilterServiceComponent implements OnInit {
@@ -75,7 +83,7 @@ export class FilterServiceComponent implements OnInit {
     public _filterCookie: Cookies;
     public _filterCookieData: string;
     public _filterCookieName: string = Constants.FILTERCOOKIENAME;
-
+    private show: boolean = false;
     private _cookie: Cookies;
 
     constructor(http: Http, public _router: Router, public _ngZone: NgZone, public _element: ElementRef, cookieService: CookieService) {
@@ -130,7 +138,11 @@ export class FilterServiceComponent implements OnInit {
     public getId() {
         this._cookie.setNanaCookie(this._sids);
     }
-
+    private closeWithTimeout() {
+        setTimeout(() => {
+            this.onClose(null);
+        }, 1500);
+    }
     private onClose(event) {
         this.toggleVisibility();
         this.mainModel.setFiltered();
