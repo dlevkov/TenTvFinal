@@ -47,9 +47,9 @@ export class ArticlesListComponent implements OnDestroy {
                 this.sids.push(+element);
             });
 
-        } else if (this._cookies.nanaFilterSids.length > 0) {
+        } else if (this._cookies.getNanaCookie().length > 0) {
             //
-            this.sids = this._cookies.nanaFilterSids;
+            this.sids = this._cookies.getNanaCookie();
 
         } else {
             this.sids = [];
