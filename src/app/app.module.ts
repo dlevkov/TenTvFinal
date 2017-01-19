@@ -105,10 +105,11 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS,
     { provide: ErrorHandler, useClass: CustomErrorHandler },
-    { provide: CookieOptions, useValue: {} },
+    { provide: CookieService, useFactory: cookieServiceFactory },
     WebApiErrorLogger
   ]
 })
+
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) { }
 
@@ -148,4 +149,9 @@ export class AppModule {
   }
 
 }
-
+// DO NOT TOUCH, used to close angular2-cookie bug #37,
+// Cookie options fix
+// https://github.com/salemdar/angular2-cookie/issues/37
+export function cookieServiceFactory() {
+  return new CookieService();
+}
