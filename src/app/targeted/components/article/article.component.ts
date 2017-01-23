@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
-import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
@@ -13,7 +13,7 @@ import { ScrollTop } from '../../../common/components/scroll-top/scroll-top.comp
     selector: 'article',
     templateUrl: 'article.component.html',
 })
-export class ArticleComponent implements OnDestroy, AfterViewChecked {
+export class ArticleComponent implements OnDestroy {
     public item: ArticleModel;
     public parser: any = window['contentParser'];
     private _currentId: number;
@@ -32,7 +32,6 @@ export class ArticleComponent implements OnDestroy, AfterViewChecked {
             this._currentId = +x['id'];
             this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId)
                 .subscribe((data) => {
-                    document.body.scrollTop = 0;
                     this.item = data;
                     this.parser.length = this.item.Paragraphs.length;
                     this._loadingUrl = this.item.TitlePic;
@@ -46,11 +45,6 @@ export class ArticleComponent implements OnDestroy, AfterViewChecked {
         this._routeSubscriber.unsubscribe();
     }
 
-    public ngAfterViewChecked() {
-       // this.animateTransition();
-    }
-
-    //
     private animateTransition() {
         let elem = this.myElement.nativeElement;
         elem.classList.remove('load-image-show');

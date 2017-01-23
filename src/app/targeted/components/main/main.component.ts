@@ -8,7 +8,7 @@ import { Cookies } from '../../../common/Cookies';
 import { MainService } from '../../services/main.service';
 import { HeadlineModel } from '../../../common/models/headline.model';
 import { FilterServiceComponent } from '../filter-service/filter-service.component';
-
+import { PreFilterMessage } from '../filter-service/pre-filter-message.component';
 
 @Component({
     selector: 'main',
@@ -24,6 +24,7 @@ export class MainComponent implements OnInit, OnDestroy {
     public _service: MainService;
     public _subscriber: Subscription;
     private _cookie: Cookies;
+    private showMessageForNewUser: boolean = false;
 
     constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
         this._service = new MainService(this.http);
@@ -39,15 +40,16 @@ export class MainComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        this.seed = new Date().getMilliseconds().toString();
         let data: string = this.route.snapshot.params['data']; // get list of id's as a string splited by ','
         if (typeof data !== 'undefined' && data) {
             this.isFiltered = true;
         }
+        if (this.isNewUser) this.showMessageForNewUser = true;
         this.getItems();
         this.addCounter();
         if (!this.isInArticle) this.initFilter();
     }
+
     public isSafary() {
         return false;
     }
@@ -68,10 +70,20 @@ export class MainComponent implements OnInit, OnDestroy {
 
     public initFilter() {
         let ids: number[] = this._cookie.getNanaCookie();
-        this.isFiltered = (ids.length > 0 && ids.length !== FilterServiceComponent.filterServices.length) ? true : false;
+        console.log(ids);
+        this.isFiltered = (((ids.length > 0 && ids.length !== FilterServiceComponent.filterServices.length) && ids[0] !== 0) ? true : false);
     }
 
     public handleFilter() {
         window['castTimeHelper'].toggleServiceFilter();
+    }
+
+    public setEmptyCookie() {
+        this._cookie.setNanaCookie([]);
+        this.showMessageForNewUser = false;
+    }
+
+    private get isNewUser() {
+        return this._cookie.isNewUser;
     }
 }

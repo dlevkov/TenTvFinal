@@ -7,6 +7,10 @@ export class Cookies {
     public nanaFilterSids: number[] = [];
     public sCookieName: string = Constants.FILTERCOOKIENAME;
 
+    public get isNewUser(): boolean {
+        return (this._cookieService.get(this.sCookieName) === undefined);
+    }
+
     private nanaFilterCookieData: string;
 
     constructor(private _cookieService: CookieService) {
@@ -18,11 +22,11 @@ export class Cookies {
 
     public setNanaCookie(sids: number[]) {
         this.nanaFilterSids = sids;
-        if (sids.length === 0) {
-            this._cookieService.remove(this.sCookieName);
-            return;
+        if (sids.length !== 0) // exists and has data
+            this.setCookie(this.nanaFilterSids.join(','), 2000, 'nana10.co.il');
+        else {
+            this.setCookie('', 200, 'nana10.co.il');
         }
-        this.setCookie(this.nanaFilterSids.join(','), 2000, 'nana10.co.il');
     }
 
     private setCookie(sValue, exdays, sDomain) {
@@ -43,6 +47,10 @@ export class Cookies {
             cookie.split(',').forEach((element) => {
                 res.push(+element); // add id's as numbers
             });
+        else {
+            return [];
+        }
+        console.log('get cookie:' + res);
         return res;
     }
 }

@@ -38,10 +38,15 @@ import { Subscription } from 'rxjs/Subscription';
         ]),
         trigger(
             'confirmationAnimation', [
-                transition(':enter', [
-                    style({ transform: 'translateY(-100%)', opacity: 0 }),
-                    animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
-                ])
+                state('shown', style({
+                    opacity: 1,
+                    transform: 'translateY(0)'
+                })),
+                state('hidden', style({
+                    opacity: 0,
+                    transform: 'translateY(-100%)'
+                })),
+                transition('hidden => shown', animate('300ms'))
             ]
         )
     ]
@@ -77,6 +82,7 @@ export class FilterServiceComponent implements OnInit {
     }
     public visibility = 'hidden';
     public confirm = false;
+    public animationConfirm = 'hidden';
     public _items: FilterServiceModel[];
     public _loadingUrl = Constants.IMAGE_LOADING_URL16_9;
     public _service: FilterServiceService;
@@ -93,7 +99,6 @@ export class FilterServiceComponent implements OnInit {
     public _filterCookie: Cookies;
     public _filterCookieData: string;
     public _filterCookieName: string = Constants.FILTERCOOKIENAME;
-    private show: boolean = false;
     private _cookie: Cookies;
 
     constructor(http: Http, public _router: Router, public _ngZone: NgZone, public _element: ElementRef, cookieService: CookieService) {
@@ -111,7 +116,6 @@ export class FilterServiceComponent implements OnInit {
     public toggleFilter() {
         this._ngZone.run(() => {
             this.toggleVisibility(); // show or hide
-            this.confirm = false; // hide confirmation
         });
     }
 
@@ -144,8 +148,9 @@ export class FilterServiceComponent implements OnInit {
 
     public Redirect() {
         this.confirm = true;
+        this.animationConfirm = 'shown';
     }
-    public getId() {
+    public setIds() {
         this._cookie.setNanaCookie(this._sids);
     }
     private closeWithTimeout() {
@@ -154,10 +159,12 @@ export class FilterServiceComponent implements OnInit {
         }, 1500);
     }
     private onClose(event) {
-        this.toggleVisibility();
+        this.visibility = 'hidden';
+        this.animationConfirm = 'hidden';
+        this.confirm = false;
         this.mainModel.setFiltered();
         this.getChecked();
-        this.getId();
+        this.setIds();
 
         if (this._sids.length > 0) // has items
             this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else
