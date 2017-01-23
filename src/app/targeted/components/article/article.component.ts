@@ -8,11 +8,13 @@ import { ArticleModel } from '../../models/article.model';
 import { Constants } from '../../../common/Constants';
 import { GoogleTagManager } from '../../../common/components/3rdParty/googleTagManager';
 import { ScrollTop } from '../../../common/components/scroll-top/scroll-top.component';
+import { HtmlContentParser } from '../../../common/HtmlContentParser';
 
 @Component({
     selector: 'article',
     templateUrl: 'article.component.html',
 })
+
 export class ArticleComponent implements OnDestroy {
     public item: ArticleModel;
     public parser: any = window['contentParser'];
@@ -23,7 +25,7 @@ export class ArticleComponent implements OnDestroy {
     private _loadingUrl: string = Constants.IMAGE_LOADING_URL16_9;
     private _nanaRouteRef: any;
 
-    constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone) {
+    constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone, private parserTs: HtmlContentParser) {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);
@@ -33,7 +35,7 @@ export class ArticleComponent implements OnDestroy {
             this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId)
                 .subscribe((data) => {
                     this.item = data;
-                    this.parser.length = this.item.Paragraphs.length;
+                    this.parserTs.length = this.item.Paragraphs.length;
                     this._loadingUrl = this.item.TitlePic;
                     this.sendArticleData();
                 });

@@ -46,14 +46,19 @@ import { GoogleTagManager } from '../app/common/components/3rdParty/googleTagMan
 
 import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
+import { HtmlContentParser } from '../app/common/HtmlContentParser';
 import { FilterConfirmation } from './targeted/components/filter-service/filter-confirmation.component';
+
 import { PreFilterMessage } from './targeted/components/filter-service/pre-filter-message.component';
+
 
 // Cookies, based on this package
 import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
+
 // Animated "scroll to element" functionality
 import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -111,9 +116,9 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    { provide: ErrorHandler, useClass: CustomErrorHandler },
     { provide: CookieService, useFactory: cookieServiceFactory },
-    WebApiErrorLogger
+    WebApiErrorLogger,
+    HtmlContentParser
   ]
 })
 
