@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
-import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
@@ -15,7 +15,7 @@ import { HtmlContentParser } from '../../../common/HtmlContentParser';
     templateUrl: 'article.component.html',
 })
 
-export class ArticleComponent implements OnDestroy, AfterViewChecked {
+export class ArticleComponent implements OnDestroy {
     public item: ArticleModel;
     public parser: any = window['contentParser'];
     private _currentId: number;
@@ -46,10 +46,6 @@ export class ArticleComponent implements OnDestroy, AfterViewChecked {
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
         this._routeSubscriber.unsubscribe();
-    }
-
-    public ngAfterViewChecked() {
-       // this.animateTransition();
     }
 
     //
