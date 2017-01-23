@@ -46,6 +46,8 @@ import { GoogleTagManager } from '../app/common/components/3rdParty/googleTagMan
 
 import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
+
+import { HtmlContentParser } from '../app/common/HtmlContentParser';
 // import { CookieService } from 'angular2-cookie/core';
 // import { CookieOptions } from 'angular2-cookie/core';
 
@@ -102,7 +104,8 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS ,
     { provide: ErrorHandler, useClass: CustomErrorHandler },
-    WebApiErrorLogger
+    WebApiErrorLogger,
+    HtmlContentParser
   ]
 })
 export class AppModule {
