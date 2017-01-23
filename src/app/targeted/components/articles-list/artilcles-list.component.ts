@@ -1,3 +1,4 @@
+import { CookieService } from 'angular2-cookie/core';
 import { Component, OnDestroy, Input, NgZone, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -16,7 +17,7 @@ import { FilterServiceComponent } from '../filter-service/filter-service.compone
     //     '(window:scroll)': 'scrolleEvent($event)'
     // }
 })
-export class ArticlesListComponent implements OnDestroy, OnChanges {
+export class ArticlesListComponent implements OnDestroy {
     @Input() public isVisible: boolean = false;
     @Input() public sids: number[] = [];
     @Input() public isInArticle: boolean = false;
@@ -29,26 +30,26 @@ export class ArticlesListComponent implements OnDestroy, OnChanges {
     public _routeSubscriber: Subscription;
     public _currentPage: number = 1;
     public _itemsPerPage: number = 10;
+    private _cookies: Cookies;
 
-
-    constructor(public http: Http, public _router: Router, public _ngZone: NgZone, public route: ActivatedRoute) {
+    constructor(public http: Http, public _router: Router, public _ngZone: NgZone, public route: ActivatedRoute, private cookieService: CookieService) {
         this._service = new ArticleListService(this.http);
+        this._cookies = new Cookies(cookieService);
         this._routeSubscriber = this.route.params.subscribe((x) => {
             this.init(x['data']);
         });
     }
 
     public init(data: string) {
-        //
-        this.seed = new Date().getMilliseconds().toString();
+
         if (typeof data !== 'undefined' && data) {
             data.split(',').forEach((element) => {
                 this.sids.push(+element);
             });
 
-        } else if (Cookies.nanaFilterSids.length > 0) {
+        } else if (this._cookies.getNanaCookie().length > 0) {
             //
-            this.sids = Cookies.nanaFilterSids;
+            this.sids = this._cookies.getNanaCookie();
 
         } else {
             this.sids = [];
@@ -73,11 +74,6 @@ export class ArticlesListComponent implements OnDestroy, OnChanges {
             });
     }
 
-    //  scrolleEvent(event) {
-    // if($(window).scrollTop() + $(window).height() == $(document).height()) {
-    //        alert("bottom!");
-    //    }
-    //  }
     public loadMore() {
         this._subscriber =
             this._service.GetItemsByUri('TenTvAppFront/article-list?' + this._url + '$top=' + (this._currentPage++ * this._itemsPerPage)
@@ -90,10 +86,6 @@ export class ArticlesListComponent implements OnDestroy, OnChanges {
     public generateDfpId(id: number): any {
         let newid = id / 5;
         return Math.floor(newid + 3);
-    }
-
-    public ngOnChanges(change) {
-        this.seed = new Date().getMilliseconds().toPrecision();
     }
 
     public isDfp(id: number): boolean {

@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, HostListener,
+         trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 import { TwitterService } from '../../services/twitter.service';
@@ -24,17 +25,33 @@ import { Constants } from '../../Constants';
         .rsvp_twitter_button{
             float: left
         }
-    `]
+    `],
+    animations:[
+        trigger('animationTrigger', [
+            state('show', style({})),
+            state('hide', style({})),
+            transition('* => *', [
+                animate ('1000ms 0s ease-in', keyframes([
+                    style({opacity:0, transform: 'translateY(30px)', offset:0}),
+                    style({opacity:0.5, transform: 'translateY(7px)', offset:.3}),
+                    style({opacity:1, transform: 'translateY(-5px)', offset:.7}),
+                    style({opacity:1, transform: 'translateY(0)', offset:1})
+                ]))
+            ])
+        ])
+    ]
 })
 export class TwitterToolbarComponent implements OnInit, OnDestroy {
     items: TwitterModel[];
+    animationState:string ='show';
+
     public _currentItem: TwitterModel;
     public _currentId: number;
     public _service: TwitterService;
     public _subscriber: Subscription;
     public _isVisible: boolean = true;
     public _isPolled = false;
-    public _itemId: number = 0;
+    public _itemId: number = 0;    
 
     constructor(http: Http, public _element: ElementRef) {
         this._service = new TwitterService(http);
@@ -43,7 +60,6 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
     scrolleEvent(event) {
         this._isVisible = (0 <= window.pageYOffset && window.pageYOffset < Constants.SCROLL_POSITION) ? true : false;
     }
-
 
     ngOnInit() {
         this._subscriber = this._service
@@ -59,7 +75,6 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
 
     resubscribe() {
         if (this.items != null && !this._isPolled) {
-            console.log('checked change');
             this._subscriber.unsubscribe();
             this._subscriber = this._service
                 .pollITwitts()
@@ -79,24 +94,13 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
             } else {
                 this._itemId++;
             }
-            this.animateTransition();
+            this.animationState = this.animationState==='show'?'hide':'show';
             this._currentItem = this.items[this._itemId];
         }
     }
+
     ngOnDestroy() {
         this._subscriber.unsubscribe();
-    }
-
-    private animateTransition() {
-        let twitter = this._element.nativeElement.children[0];
-        $nana('#twiiterItemUn').hide('slide', {
-            direction: 'down'
-        }, 400);
-        window.setTimeout( () => {
-            $nana('#twiiterItemUn').show('slide', {
-                direction: 'up'
-            }, 700);
-        }, 450);
     }
 
     private initInterval() {

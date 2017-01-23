@@ -1,34 +1,32 @@
-<div class="rsvp_filter">
-
-    <div class="rsvp_filter_outer">
-        <div class="rsvp_filter_outer2">
-            <div class="rsvp_filter_outer3">
-                <div class="rsvp_filter_title">מה מעניין אותך?
-                    <a (click)="toggleclearFilter()" id="rsvp_toggle_clear" class="rsvp_clear_filter_toggle rsvp_clear" data-clear="נקה הכל">{{clearFilterTextGet()}}</a>
-                </div>
-
-                <div style="clear:both;"></div>
-                <div class="rsvp_filter_list">
-                    <form id="rsvpselectForm">
-                        <ul class="rsvp_filter_ul">
-                            <filter-service-item *ngFor="let item of _items" [item]='item' (itemChecked)="clickCheckbox($event)"></filter-service-item>
-                            <li style="clear:both;"></li>
-                        </ul>
-
-                    </form>
-                    <div style="clear:both;"></div>
-                </div>
-                <div class="rsvp_update_feed_prom_outer">
-                    <a class="rsvp_update_feed_prom" [ngStyle]="_updateButtonStyle" (click)='Redirect()'>
-				עדכן פיד מותאם אישית
-				</a>
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-            <div style="clear:both;"></div>
+<div class="rsvp_filter" [@visibilityChanged]="visibility">
+  <div class="rsvp_filter_outer">
+    <div class="rsvp_filter_outer2">
+      <div class="rsvp_filter_outer3" *ngIf="!confirm" [@confirmationAnimation]="!show">
+        <div class="rsvp_filter_title">
+          לתצוגת פיד מותאם אישית,
+          <div style="clear:both;"></div>
+          בחרו ערוצי תוכן מועדפים
         </div>
         <div style="clear:both;"></div>
+        <div class="rsvp_filter_list">
+          <form id="rsvpselectForm">
+            <ul class="rsvp_filter_ul">
+              <filter-service-item *ngFor="let item of _items" [item]='item' (itemChecked)="clickCheckbox($event)"></filter-service-item>
+              <li style="clear:both;"></li>
+            </ul>
+          </form>
+          <div style="clear:both;"></div>
+        </div>
+        <div class="rsvp_update_feed_prom_outer">
+          <a class="rsvp_update_feed_prom" [ngStyle]="_updateButtonStyle" (click)='Redirect()'>עדכן פיד</a>
+          <a (click)="toggleclearFilter()" id="rsvp_toggle_clear" class="rsvp_clear_filter_toggle rsvp_clear" data-clear="נקה הכל">{{clearFilterTextGet()}}</a>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <filter-confirmation *ngIf="confirm" (close)="onClose($event)" [@confirmationAnimation]="show" (@confirmationAnimation.done) = "closeWithTimeout()"></filter-confirmation>
+      <div style="clear:both;"></div>
     </div>
-
+    <div style="clear:both;"></div>
+  </div>
 </div>
 <!--  filter start  -->

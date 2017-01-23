@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
-import { Component, OnDestroy, ElementRef, NgZone } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
@@ -14,8 +14,10 @@ import { HtmlContentParser } from '../../../common/HtmlContentParser';
     selector: 'article',
     templateUrl: 'article.component.html',
 })
-export class ArticleComponent implements OnDestroy {
-    private item: ArticleModel;
+
+export class ArticleComponent implements OnDestroy, AfterViewChecked {
+    public item: ArticleModel;
+    public parser: any = window['contentParser'];
     private _currentId: number;
     private _service: ArticleService;
     private _subscriber: Subscription;
@@ -27,32 +29,36 @@ export class ArticleComponent implements OnDestroy {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);
-        this._routeSubscriber = this.route.params.subscribe(x => {
+        this._routeSubscriber = this.route.params
+        .subscribe((x) => {
             this._currentId = +x['id'];
             this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId)
-                .subscribe(data => {
+                .subscribe((data) => {
+                    document.body.scrollTop = 0;
                     this.item = data;
                     this.parserTs.length = this.item.Paragraphs.length;
                     this._loadingUrl = this.item.TitlePic;
                     this.sendArticleData();
-                    this.fancyScrollToTop();
                 });
         });
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy() {
         this._subscriber.unsubscribe();
         this._routeSubscriber.unsubscribe();
     }
-    private animateTransition() {
-        $nana('article').delay(400).fadeIn(1000);
+
+    public ngAfterViewChecked() {
+       // this.animateTransition();
     }
 
-    private fancyScrollToTop() {
-        $nana('article').fadeOut(300);
-        ScrollTop.ScrollToTop(); // fix scroll in case of article to article navigation
-        this.animateTransition();
+    //
+    private animateTransition() {
+        let elem = this.myElement.nativeElement;
+        elem.classList.remove('load-image-show');
+        elem.classList.add('load-image-hidden');
     }
+
     private sendArticleData() {
         this._nanaRouteRef.invokeRouteEvent('/article/' + this.item.ArticleID,
             true, false, false, new ArticleShareData(this.item.ShareUrl, this.item.Title, this.item.SubTitle));

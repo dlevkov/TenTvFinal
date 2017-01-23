@@ -46,15 +46,18 @@ import { GoogleTagManager } from '../app/common/components/3rdParty/googleTagMan
 
 import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
-
 import { HtmlContentParser } from '../app/common/HtmlContentParser';
-// import { CookieService } from 'angular2-cookie/core';
-// import { CookieOptions } from 'angular2-cookie/core';
+import { FilterConfirmation } from './targeted/components/filter-service/filter-confirmation.component';
+
+// Cookies, based on this package
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  CookieService
 ];
 
 type StoreType = {
@@ -90,6 +93,7 @@ type StoreType = {
     ArticlesListComponent,
     FilterServiceComponent,
     FilterServiceItemComponent,
+    FilterConfirmation,
     Video,
     Controller,
     GoogleTagManager
@@ -102,12 +106,13 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS ,
-    { provide: ErrorHandler, useClass: CustomErrorHandler },
+    APP_PROVIDERS,
+    { provide: CookieService, useFactory: cookieServiceFactory },
     WebApiErrorLogger,
     HtmlContentParser
   ]
 })
+
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) { }
 
@@ -147,4 +152,9 @@ export class AppModule {
   }
 
 }
-
+// DO NOT TOUCH, used to close angular2-cookie bug #37,
+// Cookie options fix
+// https://github.com/salemdar/angular2-cookie/issues/37
+export function cookieServiceFactory() {
+  return new CookieService();
+}

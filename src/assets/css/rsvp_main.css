@@ -880,15 +880,22 @@ strong * {
 }
 
 .rsvp_clear_filter_toggle {
+    display: inline-block;
     font-family: 'OEDooPro-Bold', arial;
-    font-size: 12px;
-    float: left;
-    line-height: 35px;
+    color: #fff;
+    line-height: 42px;
+    padding: 0;
+    width: 100px;
+    margin-right: 20px;
+    height: 42px;
+    border: 1px solid transparent;
+    color: #585756;
+    font-size: 13px;
 }
 
 .rsvp_update_feed_prom_outer {
-    margin-top: 10px;
-    padding: 10px 0;
+    margin-top: 0px;
+    padding: 18px 0;
     background-color: #ebebeb;
     width: 100%;
     text-align: center;
@@ -927,9 +934,10 @@ strong * {
     border-bottom: 1px solid #c4c4c4;
     background-color: #ebebeb;
     color: #333232;
+    text-align: center;
     font-size: 15px;
-    padding: 0 10px;
-    line-height: 35px;
+    padding: 10px;
+    line-height: 18px;
 }
 
 .rsvp_filter_list {
@@ -953,10 +961,11 @@ strong * {
 
 .rsvp_update_feed_prom {
     display: inline-block;
+    width: 100px;
     font-family: 'OEDooPro-Bold', arial;
     color: #fff;
-    line-height: 30px;
-    padding: 0 10px;
+    line-height: 42px;
+    height: 42px;
     border: 1px solid #585756;
     color: #585756;
     font-size: 13px;
@@ -1668,6 +1677,26 @@ strong * {
 
 
 /* twitter api end */
+
+
+/* category title start */
+
+.rsvp_category_title_outer {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.rsvp_category_title {
+    font-size: 16px;
+    padding: 21px 0;
+    line-height: 18px;
+    color: #fd9b00;
+    font-family: 'OEDooPro-Medium', arial;
+    border-bottom: 6px solid #fd9b00;
+}
+
+
+/* category title end */
 
 @media (max-width:1300px) {
     .rsvp_feed_cat_color,
