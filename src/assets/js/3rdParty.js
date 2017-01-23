@@ -310,6 +310,11 @@ var castTimeHelper = {
   }
 };
 
+var contentParser = {
+  appendToDom: function (data) {
+    document.getElementsByTagName('head')[0].appendChild(data);
+  },
+};
 var NanaGoogleTag = {
   groupName: '', //for article and section [SectionName] property of section, default/main value 'tentvapp'
   ServiceName: '', // for article and section [ServiceName] property of Service, default/main value '0',
