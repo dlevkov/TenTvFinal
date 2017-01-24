@@ -11,7 +11,7 @@ import { PageScrollInstance, PageScrollService, EasingLogic, PageScrollConfig } 
 export class ScrollTop {
     public _isVisible: boolean = false;
 
-    constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: Document) {
+    constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
         PageScrollConfig.defaultInterruptible = true;
         PageScrollConfig.defaultEasingLogic = {
             ease: (t: number, b: number, c: number, d: number): number => {

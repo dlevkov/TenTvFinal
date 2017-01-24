@@ -1687,11 +1687,11 @@ strong * {
 }
 
 .rsvp_category_title {
-    font-size: 24px;
-    padding: 16px 0;
-    line-height: 18px;
+    font-size: 13px;
+    padding: 6px 0;
+    line-height: 16px;
     color: #fd9b00;
-    font-family: 'OEDooPro-Medium', arial;
+    font-family: 'OEDooPro-Bold', arial;
     border-bottom: 4px solid #fd9b00;
 }
 

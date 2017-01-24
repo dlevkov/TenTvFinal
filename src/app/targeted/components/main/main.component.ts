@@ -27,9 +27,9 @@ export class MainComponent implements OnInit, OnDestroy {
     public _service: MainService;
     public _subscriber: Subscription;
     public state: string = 'in';
+    public showMessageForNewUser: boolean = false;
 
     private _cookie: Cookies;
-    private showMessageForNewUser: boolean = false;
 
     constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
         this._service = new MainService(this.http);
