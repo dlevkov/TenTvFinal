@@ -9,20 +9,25 @@ import { MainService } from '../../services/main.service';
 import { HeadlineModel } from '../../../common/models/headline.model';
 import { FilterServiceComponent } from '../filter-service/filter-service.component';
 import { PreFilterMessage } from '../filter-service/pre-filter-message.component';
+import { pageTransition } from '../../../animations';
 
 @Component({
     selector: 'main',
-    templateUrl: 'main.component.html'
+    templateUrl: 'main.component.html',
+    animations: [pageTransition]
 })
 export class MainComponent implements OnInit, OnDestroy {
     @Input() public showTwitter: boolean = true;
     @Input() public isInArticle: boolean = false;
+
     public seed: string;
     public item: MainModel;
     public DfpId: number = 0;
     public isFiltered: boolean = false;
     public _service: MainService;
     public _subscriber: Subscription;
+    public state: string = 'in';
+
     private _cookie: Cookies;
     private showMessageForNewUser: boolean = false;
 
@@ -48,6 +53,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.getItems();
         this.addCounter();
         if (!this.isInArticle) this.initFilter();
+        this.state = (this.state === 'in' ? 'out' : 'in');
     }
 
     public isSafary() {

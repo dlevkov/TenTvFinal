@@ -9,8 +9,8 @@ import { PageScrollInstance, PageScrollService, EasingLogic, PageScrollConfig } 
 })
 
 export class ScrollTop {
-
     public _isVisible: boolean = false;
+
     constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: Document) {
         PageScrollConfig.defaultInterruptible = true;
         PageScrollConfig.defaultEasingLogic = {
@@ -28,6 +28,7 @@ export class ScrollTop {
     public scrolleEvent(event) {
         this._isVisible = (Constants.SCROLL_POSITION < window.pageYOffset) ? true : false;
     }
+
     public ScrollToTop() {
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#scrollToTop');
         this.pageScrollService.start(pageScrollInstance);

@@ -46,7 +46,7 @@ import { Subscription } from 'rxjs/Subscription';
                     opacity: 0,
                     transform: 'translateY(-100%)'
                 })),
-                transition('hidden => shown', animate('300ms'))
+                transition('hidden => shown', animate('500ms'))
             ]
         )
     ]
@@ -125,8 +125,8 @@ export class FilterServiceComponent implements OnInit {
     }
 
     public clearFilterTextGet() {
-        let text = this._clearFilter ? 'true' : 'false';
-        return this._clearFilterText[text];
+        // let text = this._clearFilter ? 'true' : 'false';
+        return this._clearFilterText [this._clearFilter.toString()];
     }
 
     public toggleclearFilter() {
@@ -143,7 +143,7 @@ export class FilterServiceComponent implements OnInit {
     }
 
     public toggleVisibility() {
-        this.visibility = this.visibility === 'hidden' ? 'shown' : 'hidden';
+        this.visibility = (this.visibility === 'hidden' ? 'shown' : 'hidden');
     }
 
     public Redirect() {
