@@ -23,6 +23,7 @@ export class HtmlContentParser {
           let id = this.getParameterByName(element, href);
           console.log('element', element);
           if (id !== null) {
+            aTag[i].setAttribute('target', '_self');
             switch (element) {
               case 'ArticleID':
                 aTag[i].setAttribute('href', '/article/' + id);
