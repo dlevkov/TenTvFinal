@@ -27,7 +27,6 @@ export class MainComponent implements OnInit, OnDestroy {
     public _service: MainService;
     public _subscriber: Subscription;
     public state: string = 'in';
-    public showMessageForNewUser: boolean = false;
 
     private _cookie: Cookies;
 
@@ -49,7 +48,6 @@ export class MainComponent implements OnInit, OnDestroy {
         if (typeof data !== 'undefined' && data) {
             this.isFiltered = true;
         }
-        if (this.isNewUser) this.showMessageForNewUser = true;
         this.getItems();
         this.addCounter();
         if (!this.isInArticle) this.initFilter();
@@ -82,14 +80,5 @@ export class MainComponent implements OnInit, OnDestroy {
 
     public handleFilter() {
         window['castTimeHelper'].toggleServiceFilter();
-    }
-
-    public setEmptyCookie() {
-        this._cookie.setNanaCookie([]);
-        this.showMessageForNewUser = false;
-    }
-
-    private get isNewUser() {
-        return this._cookie.isNewUser;
     }
 }

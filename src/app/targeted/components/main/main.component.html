@@ -1,5 +1,4 @@
 <div class="rsvp_fullwidth" style="margin-bottom: 100px;" [@transition]='state'>
-    <pre-filter-message *ngIf="showMessageForNewUser" (close)="setEmptyCookie()"></pre-filter-message>
     <div *ngFor="let headline of item?.Headlines; let i=index" [class]='headline.getClass(i)'>
         <headline-main [item]='headline' *ngIf="headline.isMain"></headline-main>
         <headline-big [item]='headline' *ngIf="headline.isBig && headline.isTopFour"></headline-big>
