@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, HostListener,
-         trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, AfterViewChecked, ElementRef, HostListener,
+    trigger, state, style, transition, animate, keyframes
+} from '@angular/core';
 import { Http } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 import { TwitterService } from '../../services/twitter.service';
@@ -26,16 +28,16 @@ import { Constants } from '../../Constants';
             float: left
         }
     `],
-    animations:[
+    animations: [
         trigger('animationTrigger', [
             state('show', style({})),
             state('hide', style({})),
             transition('* => *', [
-                animate ('1000ms 0s ease-in', keyframes([
-                    style({opacity:0, transform: 'translateY(30px)', offset:0}),
-                    style({opacity:0.5, transform: 'translateY(7px)', offset:.3}),
-                    style({opacity:1, transform: 'translateY(-5px)', offset:.7}),
-                    style({opacity:1, transform: 'translateY(0)', offset:1})
+                animate('1000ms 0s ease-in', keyframes([
+                    style({ opacity: 0, transform: 'translateY(30px)', offset: 0 }),
+                    style({ opacity: 0.5, transform: 'translateY(7px)', offset: .3 }),
+                    style({ opacity: 1, transform: 'translateY(-5px)', offset: .7 }),
+                    style({ opacity: 1, transform: 'translateY(0)', offset: 1 })
                 ]))
             ])
         ])
@@ -43,7 +45,7 @@ import { Constants } from '../../Constants';
 })
 export class TwitterToolbarComponent implements OnInit, OnDestroy {
     items: TwitterModel[];
-    animationState:string ='show';
+    animationState: string = 'show';
 
     public _currentItem: TwitterModel;
     public _currentId: number;
@@ -51,7 +53,7 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
     public _subscriber: Subscription;
     public _isVisible: boolean = true;
     public _isPolled = false;
-    public _itemId: number = 0;    
+    public _itemId: number = 0;
 
     constructor(http: Http, public _element: ElementRef) {
         this._service = new TwitterService(http);
@@ -91,10 +93,11 @@ export class TwitterToolbarComponent implements OnInit, OnDestroy {
         if (typeof this.items !== 'undefined') {
             if (this.items.length <= this._itemId + 1) {
                 this._currentItem = this.items[0];
+                this._itemId = 0;
             } else {
                 this._itemId++;
             }
-            this.animationState = this.animationState==='show'?'hide':'show';
+            this.animationState = (this.animationState === 'show' ? 'hide' : 'show');
             this._currentItem = this.items[this._itemId];
         }
     }

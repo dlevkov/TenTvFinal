@@ -1,7 +1,7 @@
 <div class="rsvp_filter" [@visibilityChanged]="visibility">
   <div class="rsvp_filter_outer">
     <div class="rsvp_filter_outer2">
-      <div class="rsvp_filter_outer3" *ngIf="!confirm" [@confirmationAnimation]="!show">
+      <div class="rsvp_filter_outer3" *ngIf="!confirm">
         <div class="rsvp_filter_title">
           לתצוגת פיד מותאם אישית,
           <div style="clear:both;"></div>
@@ -23,7 +23,7 @@
         </div>
         <div style="clear:both;"></div>
       </div>
-      <filter-confirmation *ngIf="confirm" (close)="onClose($event)" [@confirmationAnimation]="show" (@confirmationAnimation.done) = "closeWithTimeout()"></filter-confirmation>
+      <filter-confirmation *ngIf="confirm" (close)="onClose($event)" [@confirmationAnimation]="animationConfirm" (@confirmationAnimation.done) = "closeWithTimeout()"></filter-confirmation>
       <div style="clear:both;"></div>
     </div>
     <div style="clear:both;"></div>

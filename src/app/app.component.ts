@@ -1,3 +1,4 @@
+import { DiagnosticsEnumValue } from 'typedoc/dist/lib/ts-internal';
 /*
  * Angular 2 decorators and services
  */
@@ -18,12 +19,11 @@ import { AppState } from './app.service';
     '../assets/css/custom_nana.css'
   ],
   template: `
+          <div id='scrollToTop'></div>
           <scroll-top></scroll-top>
           <controller></controller>
-          <router-outlet>
-          </router-outlet>        
-
-  `
+          <router-outlet></router-outlet>        
+          `
 })
 export class App {
 

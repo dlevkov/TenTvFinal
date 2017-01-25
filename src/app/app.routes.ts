@@ -6,7 +6,7 @@ import { DataResolver } from './app.resolver';
 import { ArticleComponent } from './targeted/components/article/article.component';
 import { TwitterComponent } from './common/components/twitter/twitter.component';
 import { ArticlesListComponent } from './targeted/components/articles-list/artilcles-list.component';
-import { FilterServiceComponent } from './targeted/components/filter-service/filter-service.component';
+import { PreFilterMessage } from './targeted/components/filter-service/pre-filter-message.component';
 
 
 export const ROUTES: Routes = [
@@ -19,7 +19,7 @@ export const ROUTES: Routes = [
   { path: 'Article/:id', component: ArticleComponent },
   { path: 'article/:id', component: ArticleComponent },
   { path: 'twitter', component: TwitterComponent },
-  { path: 'filter', component: FilterServiceComponent },
+  { path: 'filter', component: PreFilterMessage },
   { path: '**', component: NoContent },
 
 ];

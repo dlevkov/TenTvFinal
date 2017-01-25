@@ -1,4 +1,5 @@
-<div class="rsvp_fullwidth" style="margin-bottom: 100px;">
+<div class="rsvp_fullwidth" style="margin-bottom: 100px;" [@transition]='state'>
+    <pre-filter-message *ngIf="showMessageForNewUser" (close)="setEmptyCookie()"></pre-filter-message>
     <div *ngFor="let headline of item?.Headlines; let i=index" [class]='headline.getClass(i)'>
         <headline-main [item]='headline' *ngIf="headline.isMain"></headline-main>
         <headline-big [item]='headline' *ngIf="headline.isBig && headline.isTopFour"></headline-big>
@@ -9,7 +10,6 @@
             <headline-pair [item]='headline' *ngIf="headline.isPair" [nextItem]='headline.PairStart ? item.Headlines[i+1] : null'></headline-pair>
             <headline-ad [item]='headline' *ngIf="headline.isAd"></headline-ad>
             <headline-adsecond [item]='headline' *ngIf="headline.isAdSecond"></headline-adsecond>
-
         </div>
         <dfp *ngIf="!isInArticle && headline.isDfp(i,item?.TopFourEndIndex,item?.AlertsEndIndex,item?.isFiltered)" [placeHolderId]='"ad-div-upper-strip-" + i + seed' [dfpId]='generateDfpId()' [dfpStyle]='{"width":"320px", "margin":"0 auto","margin-top":"10px","margin-bottom":"10px", "background-color":"transparent"}'
             [dfpObjectName]='"main"'></dfp>

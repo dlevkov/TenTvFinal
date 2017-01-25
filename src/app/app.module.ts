@@ -49,8 +49,17 @@ import { FilterServiceItemComponent } from './targeted/components/filter-service
 import { HtmlContentParser } from '../app/common/HtmlContentParser';
 import { FilterConfirmation } from './targeted/components/filter-service/filter-confirmation.component';
 
+import { PreFilterMessage } from './targeted/components/filter-service/pre-filter-message.component';
+
+
 // Cookies, based on this package
 import { CookieService, CookieOptions } from 'angular2-cookie/core';
+
+
+// Animated "scroll to element" functionality
+// https://github.com/Nolanus/ng2-page-scroll/issues/35
+// AOT not working YET
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 
 // Application wide providers
@@ -94,6 +103,7 @@ type StoreType = {
     FilterServiceComponent,
     FilterServiceItemComponent,
     FilterConfirmation,
+    PreFilterMessage,
     Video,
     Controller,
     GoogleTagManager
@@ -102,7 +112,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    Ng2PageScrollModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
