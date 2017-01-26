@@ -1,5 +1,5 @@
-import { CookieService } from 'angular2-cookie/core';
-import { Component, OnDestroy, Input, NgZone, OnChanges } from '@angular/core';
+import { CookieOptionsArgs, CookieService } from 'angular2-cookie/core';
+import { Component, Input, NgZone, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Constants } from '../../../common/Constants';
@@ -13,11 +13,8 @@ import { FilterServiceComponent } from '../filter-service/filter-service.compone
 @Component({
     selector: 'articles-list',
     templateUrl: 'articles-list.component.html',
-    // host: {
-    //     '(window:scroll)': 'scrolleEvent($event)'
-    // }
 })
-export class ArticlesListComponent implements OnDestroy {
+export class ArticlesListComponent implements OnDestroy, OnInit {
     @Input() public isVisible: boolean = false;
     @Input() public sids: number[] = [];
     @Input() public isInArticle: boolean = false;
@@ -30,7 +27,10 @@ export class ArticlesListComponent implements OnDestroy {
     public _routeSubscriber: Subscription;
     public _currentPage: number = 1;
     public _itemsPerPage: number = 10;
+    public showTooltip: boolean = false;
+
     private _cookies: Cookies;
+    private sCookieName = 'filterTooltip';
 
     constructor(public http: Http, public _router: Router, public _ngZone: NgZone, public route: ActivatedRoute, private cookieService: CookieService) {
         this._service = new ArticleListService(this.http);
@@ -39,7 +39,11 @@ export class ArticlesListComponent implements OnDestroy {
             this.init(x['data']);
         });
     }
-
+    public ngOnInit() {
+        this.showTooltip = !this.getTooltipCookie() && !this._cookies.isNewUser;
+        console.log('cookie exists: ' + this.getTooltipCookie() + ' ,user is new: ' + this._cookies.isNewUser);
+        console.log('tooltip hide: ' + this.showTooltip);
+    }
     public init(data: string) {
 
         if (typeof data !== 'undefined' && data) {
@@ -96,6 +100,7 @@ export class ArticlesListComponent implements OnDestroy {
 
     public toggleFilter() {
         window['castTimeHelper'].toggleServiceFilter();
+        this.setTooltipCookie();
     }
 
     public scrollIntoView(eleID) {
@@ -111,6 +116,19 @@ export class ArticlesListComponent implements OnDestroy {
         this._subscriber.unsubscribe();
     }
 
+    public setTooltipCookie() {
+        let key = this.sCookieName;
+        let opts: CookieOptionsArgs = {
+            expires: new Date('2030-07-19')
+        };
+        this.cookieService.put(key, '', opts);
+        this.showTooltip = false;
+    }
+
+    private getTooltipCookie(): boolean {
+        let cookie = (this.cookieService.get(this.sCookieName));
+        return (cookie !== undefined); // if exists - false
+    }
 }
 
 

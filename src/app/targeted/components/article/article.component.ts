@@ -12,7 +12,7 @@ import { ScrollTop } from '../../../common/components/scroll-top/scroll-top.comp
 import { HtmlContentParser } from '../../../common/HtmlContentParser';
 import { pageTransition } from '../../../animations';
 import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
-
+import { FilterTooltipComponent } from '../filter-service/filter-tooltip.component';
 
 @Component({
     selector: 'article',
@@ -32,7 +32,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
     private _nanaRouteRef: any;
 
     constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone,
-                private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+        private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);

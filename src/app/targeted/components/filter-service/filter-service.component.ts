@@ -99,7 +99,7 @@ export class FilterServiceComponent implements OnInit {
     public _filterCookie: Cookies;
     public _filterCookieData: string;
     public _filterCookieName: string = Constants.FILTERCOOKIENAME;
-     public showMessageForNewUser: boolean = false;
+    public showMessageForNewUser: boolean = false;
     private _cookie: Cookies;
 
     constructor(http: Http, public _router: Router, public _ngZone: NgZone, public _element: ElementRef, cookieService: CookieService) {
@@ -111,7 +111,7 @@ export class FilterServiceComponent implements OnInit {
     public ngOnInit() {
         this.initItems();
         this.initUserData();
-         if (this.isNewUser) this.showMessageForNewUser = true;
+        if (this.isNewUser) this.showMessageForNewUser = true;
     }
 
     // Used by Outer JS Object CastTimeHelper.toggleServiceFilter(). DO_NOT_CHANGE
@@ -128,7 +128,7 @@ export class FilterServiceComponent implements OnInit {
 
     public clearFilterTextGet() {
         // let text = this._clearFilter ? 'true' : 'false';
-        return this._clearFilterText [this._clearFilter.toString()];
+        return this._clearFilterText[this._clearFilter.toString()];
     }
 
     public toggleclearFilter() {
@@ -155,7 +155,7 @@ export class FilterServiceComponent implements OnInit {
     public setIds() {
         this._cookie.setNanaCookie(this._sids);
     }
-     public setEmptyCookie() {
+    public setEmptyCookie() {
         this._cookie.setNanaCookie([]);
         this.showMessageForNewUser = false;
     }
