@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
     constructor(private logger: WebApiErrorLogger) { }
-    handleError(error: Response) {
+    public handleError(error: Response) {
         if ('development' === ENV) {
             console.log('Error transferred to custom handler: ' + error);
         } else {

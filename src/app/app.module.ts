@@ -121,6 +121,7 @@ type StoreType = {
     APP_PROVIDERS,
     { provide: CookieService, useFactory: cookieServiceFactory },
     WebApiErrorLogger,
+    { provide: ErrorHandler, useClass: CustomErrorHandler },
     HtmlContentParser
   ]
 })
