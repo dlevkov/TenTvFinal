@@ -22,7 +22,7 @@ export class Dal {
     }
     public handleError(error: Response) {
 
-        // console.error(error);
+        console.error(error);
         // window.location.href = '/main';
         return Observable.throw(error || 'Server error');
     }
