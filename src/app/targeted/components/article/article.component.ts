@@ -1,6 +1,7 @@
+import { DOCUMENT } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
-import { Component, ElementRef, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
@@ -10,16 +11,17 @@ import { GoogleTagManager } from '../../../common/components/3rdParty/googleTagM
 import { ScrollTop } from '../../../common/components/scroll-top/scroll-top.component';
 import { HtmlContentParser } from '../../../common/HtmlContentParser';
 import { pageTransition } from '../../../animations';
+import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
+import { FilterTooltipComponent } from '../filter-service/filter-tooltip.component';
+
 @Component({
     selector: 'article',
     templateUrl: 'article.component.html',
     animations: [pageTransition]
-
 })
 
 export class ArticleComponent implements OnDestroy, OnInit {
     public item: ArticleModel;
-    public parser: any = window['contentParser'];
     public state: string = 'in';
 
     private _currentId: number;
@@ -28,9 +30,9 @@ export class ArticleComponent implements OnDestroy, OnInit {
     private _routeSubscriber: Subscription;
     private _loadingUrl: string = Constants.IMAGE_LOADING_URL16_9;
     private _nanaRouteRef: any;
-    private scrollTop: ScrollTop;
 
-    constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone, private parserTs: HtmlContentParser) {
+    constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone,
+        private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);
@@ -43,8 +45,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
                         this.item = data;
                         this.parserTs.length = this.item.Paragraphs.length;
                         this._loadingUrl = this.item.TitlePic;
-                        this.state = 'out';
-                        window.scroll(0, 0);
+                        this.ScrollToTop();
                         this.sendArticleData();
                     });
             });
@@ -56,8 +57,13 @@ export class ArticleComponent implements OnDestroy, OnInit {
         console.log('state destroy:' + this.state);
     }
     public ngOnInit() {
-        // this.state = (this.state === 'in' ? 'out' : 'in');
+        this.state = (this.state === 'in' ? 'out' : 'in');
         console.log('state init:' + this.state);
+    }
+
+    public ScrollToTop() {
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#scrollToTop');
+        this.scrollService.start(pageScrollInstance);
     }
 
     private animateTransition() {
@@ -71,6 +77,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
         this._nanaRouteRef.invokeRouteEvent('/article/' + this.item.ArticleID,
             true, false, false, new ArticleShareData(this.item.ShareUrl, this.item.Title, this.item.SubTitle));
     }
+
     // ***************************************************************************************************************************//
     // Get angular function from external JS:
     // Add to \src\custom-typings.d.ts -  interface Window { angularComponentRef : any; }

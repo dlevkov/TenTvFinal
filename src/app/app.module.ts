@@ -48,7 +48,7 @@ import { FilterServiceComponent } from './targeted/components/filter-service/fil
 import { FilterServiceItemComponent } from './targeted/components/filter-service/filter-service-item.component';
 import { HtmlContentParser } from '../app/common/HtmlContentParser';
 import { FilterConfirmation } from './targeted/components/filter-service/filter-confirmation.component';
-
+import { FilterTooltipComponent } from './targeted/components/filter-service/filter-tooltip.component';
 import { PreFilterMessage } from './targeted/components/filter-service/pre-filter-message.component';
 
 
@@ -103,6 +103,7 @@ type StoreType = {
     FilterServiceComponent,
     FilterServiceItemComponent,
     FilterConfirmation,
+    FilterTooltipComponent,
     PreFilterMessage,
     Video,
     Controller,
