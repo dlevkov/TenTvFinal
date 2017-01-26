@@ -123,7 +123,7 @@ var nanaHelper = {
       var selectors = document.querySelectorAll(this.fontSelectors[key]);
       selectors.forEach(function (selector) {
         if (selector) {
-          selector.setAttribute('style', 'font-size:' + this.currentFontSize + 'px');
+          selector.style.fontSize =  this.currentFontSize + 'px';
         }
       }, this);     
     }
