@@ -17,7 +17,7 @@ export class WebApiErrorLogger implements OnDestroy {
         this._dal = new Dal(_http);
     }
 
-    public Log(title: string, message: Response) {
+    public Log(title: string, message) {
 
         let jsonMessage = this.convertResponseToJsonMessage(message);
         if (!this._subscriber)
@@ -34,9 +34,9 @@ export class WebApiErrorLogger implements OnDestroy {
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
     }
-    private convertResponseToJsonMessage(message: Response) {
+    private convertResponseToJsonMessage(message) {
 
-        console.log(message);
+        console.log('Income error:' + message);
         let obj = {
             title: message.statusText || 'Angular2 Error',
             source: null,
@@ -46,7 +46,8 @@ export class WebApiErrorLogger implements OnDestroy {
             statusCode: message.status || null,
             severity: 'Error' || null,
             type: 'Error',
-            url: message.url
+            url: message.url,
+            cookies: message.headers
         };
         return obj;
     }
