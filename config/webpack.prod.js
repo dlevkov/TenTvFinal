@@ -24,7 +24,9 @@ const V8LazyParseWebpackPlugin = require('v8-lazy-parse-webpack-plugin');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
-const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
+const METADATA = webpackMerge(commonConfig({
+  env: ENV
+}).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
@@ -32,7 +34,9 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
 });
 
 module.exports = function (env) {
-  return webpackMerge(commonConfig({env: ENV}), {
+  return webpackMerge(commonConfig({
+    env: ENV
+  }), {
 
     /**
      * Developer tool to enhance debugging
@@ -169,7 +173,8 @@ module.exports = function (env) {
           evaluate: true,
           if_return: true,
           join_vars: true,
-          negate_iife: false // we need this for lazy v8
+          negate_iife: false, // we need this for lazy v8
+          drop_console: true
         },
       }),
 
@@ -192,34 +197,34 @@ module.exports = function (env) {
 
 
       // AoT
-      // new NormalModuleReplacementPlugin(
-      //   /@angular(\\|\/)upgrade/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /@angular(\\|\/)compiler/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /@angular(\\|\/)platform-browser-dynamic/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /dom(\\|\/)debug(\\|\/)ng_probe/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /dom(\\|\/)debug(\\|\/)by/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /src(\\|\/)debug(\\|\/)debug_node/,
-      //   helpers.root('config/empty.js')
-      // ),
-      // new NormalModuleReplacementPlugin(
-      //   /src(\\|\/)debug(\\|\/)debug_renderer/,
-      //   helpers.root('config/empty.js')
-      // ),
+      new NormalModuleReplacementPlugin(
+        /@angular(\\|\/)upgrade/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /@angular(\\|\/)compiler/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /@angular(\\|\/)platform-browser-dynamic/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /dom(\\|\/)debug(\\|\/)ng_probe/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /dom(\\|\/)debug(\\|\/)by/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /src(\\|\/)debug(\\|\/)debug_node/,
+        helpers.root('config/empty.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /src(\\|\/)debug(\\|\/)debug_renderer/,
+        helpers.root('config/empty.js')
+      ),
 
       /**
        * Plugin: CompressionPlugin
