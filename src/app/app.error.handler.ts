@@ -1,3 +1,4 @@
+import { errorObject } from 'rxjs/util/errorObject';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { WebApiErrorLogger } from './common/services/webapi-error-logger.service';
 import { Response } from '@angular/http';
@@ -12,10 +13,10 @@ export class CustomErrorHandler implements ErrorHandler {
             return;
         }
         this.lastError = error;
-        // if ('development' === ENV) {
-        //     console.log('Error transferred to custom handler: ' + error);
-        // } else {
+        if ('development' === ENV) {
+            console.log('Error transferred to custom handler: ' + error);
+        } else {
             this.logger.Log(error.statusText, error);
-        // }
+        }
     }
 }
