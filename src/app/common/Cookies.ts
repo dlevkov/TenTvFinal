@@ -8,7 +8,7 @@ export class Cookies {
     public sCookieName: string = Constants.FILTERCOOKIENAME;
 
     public get isNewUser(): boolean {
-        return (this._cookieService.get(this.sCookieName) === undefined);
+        return (this._cookieService.get(this.sCookieName) === undefined); // returns true ony in case cookie not exists
     }
 
     private nanaFilterCookieData: string;
