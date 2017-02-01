@@ -51,6 +51,11 @@ export class Controller implements OnInit {
             this._location.back(); // in HTML5 window.history.back(); works fine
         });
     }
+    public navigateHome(data: string) {
+        this._ngZone.run(() => {
+            this._router.navigate(['/main']);
+        });
+    }
 
 
     private isArticle(url: string) {

@@ -247,6 +247,13 @@ var nanaRoute = {
       }
     );
   },
+    navigateHome: function () {
+    window.angularComponentNav.zone.run(
+      function () {
+        window.angularComponentNav.component.navigateHome();
+      }
+    );
+  },
   init: function () {
     this.initRouteEvents();
     document.addEventListener("RouteEvent", castTimeHelper.routeHandler, false);
@@ -314,6 +321,9 @@ var castTimeHelper = {
   },
   navigateBack: function () {
     nanaRoute.navigateBack();
+  },
+   navigateToHomePage : function () {
+    nanaRoute.navigateHome();
   }
 };
 
