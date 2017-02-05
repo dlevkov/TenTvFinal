@@ -38,15 +38,10 @@ import { Subscription } from 'rxjs/Subscription';
         ]),
         trigger(
             'confirmationAnimation', [
-                state('shown', style({
-                    opacity: 1,
-                    transform: 'translateY(0)'
-                })),
-                state('hidden', style({
-                    opacity: 0,
-                    transform: 'translateY(-100%)'
-                })),
-                transition('hidden => shown', animate('500ms'))
+                transition(':enter', [
+                    style({ transform: 'translateY(-100%)', opacity: 0.5 }),
+                    animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
+                ])
             ]
         )
     ]
