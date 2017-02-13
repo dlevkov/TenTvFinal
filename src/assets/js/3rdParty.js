@@ -105,6 +105,7 @@ var nanaHelper = {
   maxFontSize: 50,
   minFontSize: 16,
   fontInterval: 2,
+  currentLineHeight: 20,
   getCssPropertyValue: function (cssProp) {
     var currentSelector = document.querySelector(this.fontSelectors[1]);
     var currentSelectorStyle = window.getComputedStyle(currentSelector, null).getPropertyValue(cssProp);
@@ -114,18 +115,21 @@ var nanaHelper = {
 
   changeFontSize: function (zoomin) {
     this.currentFontSize = parseInt(this.getCssPropertyValue('font-size'));
+    this.currentLineHeight = parseInt(this.getCssPropertyValue('font-size'));
     console.log('currentFontSize', this.currentFontSize)
     if ((this.currentFontSize >= this.maxFontSize && zoomin) || (this.currentFontSize <= this.minFontSize && !zoomin))
       return false;
     var zoomI = zoomin ? 1 : -1;
     this.currentFontSize += (this.fontInterval * zoomI);
+    this.lineHeight += (this.fontInterval * zoomI);
     for (var key in this.fontSelectors) {
       var selectors = document.querySelectorAll(this.fontSelectors[key]);
       selectors.forEach(function (selector) {
         if (selector) {
-          selector.style.fontSize =  this.currentFontSize + 'px';
+          selector.style.fontSize = this.currentFontSize + 'px';
+          selector.style.lineHeight = this.currentLineHeight + 'px';
         }
-      }, this);     
+      }, this);
     }
   }
 }
@@ -247,7 +251,7 @@ var nanaRoute = {
       }
     );
   },
-    navigateHome: function () {
+  navigateHome: function () {
     window.angularComponentNav.zone.run(
       function () {
         window.angularComponentNav.component.navigateHome();
@@ -322,7 +326,7 @@ var castTimeHelper = {
   navigateBack: function () {
     nanaRoute.navigateBack();
   },
-   navigateToHomePage : function () {
+  navigateToHomePage: function () {
     nanaRoute.navigateHome();
   }
 };
