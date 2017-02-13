@@ -17,7 +17,6 @@ export enum ImageTypes {
     Medium_460_258,
     Big_768_400,
     HeadlIne_Big_460_258,
-    Headline_Small_303_165,
     Article_Default,
     Main_450_450,
     Main_303_165,

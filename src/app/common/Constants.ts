@@ -162,6 +162,7 @@ export class Constants {
             case ImageTypes.Small_303_165:
                 currentType = 493;
                 break;
+            case ImageTypes.HeadlIne_Big_460_258:
             case ImageTypes.Medium_460_258:
                 currentType = 693;
                 break;
@@ -171,14 +172,8 @@ export class Constants {
             case ImageTypes.Big_768_400:
                 currentType = 1677;
                 break;
-            case ImageTypes.HeadlIne_Big_460_258:
-                currentType = 693;
-                break;
             case ImageTypes.Article_Default:
                 currentType = 11;
-                break;
-            case ImageTypes.Headline_Small_303_165:
-                currentType = 14;
                 break;
             case ImageTypes.Main_450_450:
                 currentType = 76;
