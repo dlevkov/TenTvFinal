@@ -128,7 +128,7 @@ var nanaHelper = {
         if (selector) {
           selector.style.fontSize = this.currentFontSize + 'px';
           selector.style.lineHeight = this.currentLineHeight + 'px';
-        }
+        } 
       }, this);
     }
   }
