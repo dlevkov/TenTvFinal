@@ -22,6 +22,5 @@ export const ROUTES: Routes = [
   { path: 'twitter', component: TwitterComponent },
   { path: 'filter', component: PreFilterMessage },
   { path: '**', component: NoContent },
-
 ];
 

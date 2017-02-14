@@ -16,6 +16,7 @@ import { pageTransition } from '../../../animations';
     templateUrl: 'main.component.html',
     animations: [pageTransition]
 })
+
 export class MainComponent implements OnInit, OnDestroy {
     @Input() public showTwitter: boolean = true;
     @Input() public isInArticle: boolean = false;

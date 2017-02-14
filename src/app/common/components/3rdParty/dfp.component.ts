@@ -9,6 +9,7 @@ import { Maavaron } from './maavaron.component';
     <div *ngIf='!_isDisabled' id="{{placeHolderId}}" [ngStyle]="dfpStyle" [class]='"mainDfpItem"'></div>
   `
 })
+
 export class DfpMain implements AfterViewInit {
     @Input() public serviceName: string = '10tv';
     @Input() public placeHolderId: string = '';

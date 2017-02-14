@@ -20,6 +20,7 @@ import { FilterTooltipComponent } from '../filter-service/filter-tooltip.compone
     animations: [pageTransition]
 })
 
+
 export class ArticleComponent implements OnDestroy, OnInit {
     public item: ArticleModel;
     public state: string = 'in';

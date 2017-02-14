@@ -32,3 +32,4 @@ export enum HeadlineItemTypes {
     Small = 0,
     Alert = 6
 }
+

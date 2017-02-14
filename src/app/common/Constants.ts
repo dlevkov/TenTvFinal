@@ -152,7 +152,6 @@ export class Constants {
         return units;
     }
 
-
     public static GetImagePathByType(mediaStockImageID, item: ImageTypes, mediaStockImageExt?: string): string {
         let currentType: number = 0;
         switch (item) {

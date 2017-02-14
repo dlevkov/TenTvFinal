@@ -151,6 +151,7 @@ export class FilterServiceComponent implements OnInit {
     public setIds() {
         this._cookie.setNanaCookie(this._sids);
     }
+
     public setEmptyCookie() {
         this._cookie.setNanaCookie([]);
         this.showMessageForNewUser = false;
