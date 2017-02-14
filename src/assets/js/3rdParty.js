@@ -185,7 +185,7 @@ function AdUnitsCollection() {
     //
     this.initGeneral = function() {
         googletag.cmd.push(function() {
-            for (let i = 0; i < AdUnitsCollectionIndex.list.length; i++) {
+            for (var i = 0; i < AdUnitsCollectionIndex.list.length; i++) {
                 var unit = AdUnitsCollectionIndex.list[i];
 
                 if (unit.initialized) return false;
