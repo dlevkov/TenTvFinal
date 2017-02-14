@@ -11,12 +11,12 @@ import { Maavaron } from './maavaron.component';
 })
 
 export class DfpMain implements AfterViewInit {
-    @Input() public serviceName: string = '10tv';
-    @Input() public placeHolderId: string = '';
-    @Input() public dfpObjectName: string = 'main';
-    @Input() public dfpStyle: string = '';
-    @Input() public maavaron: Maavaron;
-    @Input() public dfpId: number;
+    @Input() serviceName: string = '10tv';
+    @Input() placeHolderId: string = '';
+    @Input() dfpObjectName: string = 'main';
+    @Input() dfpStyle: string = '';
+    @Input() maavaron: Maavaron;
+    @Input() dfpId: number;
 
     public _dfpRef: any[];
     public _isVisible: boolean = false;
@@ -30,16 +30,16 @@ export class DfpMain implements AfterViewInit {
     public _adUnitsCollectionIndex: any;
 
 
-    public ngAfterViewInit() {
+    ngAfterViewInit() {
 
         this.generateDfpParams();
         let unit = this.setDfpParams();
-        // reinit dfp
+        //reinit dfp
         this._adUnitsCollectionIndex.init();
 
     }
 
-    public setDfpParams(): any {
+    setDfpParams(): any {
         let unit = new window['AdUnitsCollection']();
         this._adUnitsCollectionIndex = window['AdUnitsCollectionIndex'];
         this._adUnitsCollectionIndex.getUnitsCount();
@@ -55,13 +55,13 @@ export class DfpMain implements AfterViewInit {
 
 
     //
-    public getResolution() {
+    getResolution() {
         this._currentResolution.length = 0;
         this._currentResolution = [screen.width, screen.height];
     }
 
     //
-    public getMainAdUnitSize() {
+    getMainAdUnitSize() {
         let res = [];
 
         switch (this._currentResolution[0]) {
@@ -79,25 +79,7 @@ export class DfpMain implements AfterViewInit {
     }
 
     //
-    public getInboardAdUnitSize() {
-        let res = [];
-
-        switch (this._currentResolution[0]) {
-            case 2:
-
-                break;
-
-            default:
-                res.push(1);
-                res.push(1);
-                break;
-        }
-        return res;
-
-    }
-
-    //
-    public getArticleAdUnitSize() {
+    getArticleAdUnitSize() {
         let res = [];
 
         switch (this._currentResolution[0]) {
@@ -114,7 +96,7 @@ export class DfpMain implements AfterViewInit {
     }
 
     //
-    public getMaavaronAdUnitSize() {
+    getMaavaronAdUnitSize() {
         let res = [];
 
         switch (this._currentResolution[0]) {
@@ -130,7 +112,7 @@ export class DfpMain implements AfterViewInit {
         return res;
     }
 
-    public generateDfpParams() {
+    generateDfpParams() {
         this.getResolution();
         switch (this.dfpObjectName) {
             case 'main':
@@ -140,10 +122,6 @@ export class DfpMain implements AfterViewInit {
             case 'article':
                 this.adUnitName = Constants.DFPADUNITSNAMES['box'];
                 this.adSize = this.getArticleAdUnitSize();
-                break;
-            case 'inboard':
-                this.adUnitName = Constants.DFPADUNITSNAMES['inboard'];
-                this.adSize = this.getInboardAdUnitSize();
                 break;
             case 'maavaron':
                 this.adUnitName = Constants.DFPADUNITSNAMES['maavaron'];

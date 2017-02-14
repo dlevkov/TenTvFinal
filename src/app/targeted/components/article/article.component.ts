@@ -24,7 +24,6 @@ import { FilterTooltipComponent } from '../filter-service/filter-tooltip.compone
 export class ArticleComponent implements OnDestroy, OnInit {
     public item: ArticleModel;
     public state: string = 'in';
-    public seed: string;
 
     private _currentId: number;
     private _service: ArticleService;
@@ -38,7 +37,6 @@ export class ArticleComponent implements OnDestroy, OnInit {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);
-        this.seed = new Date().getTime().toString();
 
         this._routeSubscriber = this.route.params
             .subscribe((x) => {

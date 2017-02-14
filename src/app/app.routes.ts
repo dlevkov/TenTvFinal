@@ -13,7 +13,6 @@ export const ROUTES: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
   { path: 'mainfiltered/:id', component: MainComponent },
-  { path: 'mainfiltered', redirectTo: '/main', pathMatch: 'full' },
   { path: 'article-list', component: ArticlesListComponent },
   { path: 'Section/:id', component: SectionComponent },
   { path: 'section/:id', component: SectionComponent },

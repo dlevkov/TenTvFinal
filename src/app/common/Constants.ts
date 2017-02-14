@@ -143,11 +143,10 @@ export class Constants {
 
     public static InitDfpAdUnitsName(): any {
         let units = {
-            maavaron: Constants.GOOGLEDFPID + 'Channel10_Interstitial_Ros_test1',
+            'maavaron': Constants.GOOGLEDFPID + 'Channel10_Interstitial_Ros_test1',
             // liveBox: googleDfpID + 'MOBILE_NANA10_LiveBoxVideo_300x250',
-            strip: Constants.GOOGLEDFPID + 'Channel10_Strip_General_',
-            box: Constants.GOOGLEDFPID + 'Channel10_Box_300X250',
-            inboard: Constants.GOOGLEDFPID + 'Channel10_App_Inboard',
+            'strip': Constants.GOOGLEDFPID + 'Channel10_Strip_General_',
+            'box': Constants.GOOGLEDFPID + 'Channel10_Box_300X250',
         };
         return units;
     }
@@ -162,7 +161,6 @@ export class Constants {
             case ImageTypes.Small_303_165:
                 currentType = 493;
                 break;
-            case ImageTypes.HeadlIne_Big_460_258:
             case ImageTypes.Medium_460_258:
                 currentType = 693;
                 break;
@@ -172,8 +170,14 @@ export class Constants {
             case ImageTypes.Big_768_400:
                 currentType = 1677;
                 break;
+            case ImageTypes.HeadlIne_Big_460_258:
+                currentType = 693;
+                break;
             case ImageTypes.Article_Default:
                 currentType = 11;
+                break;
+            case ImageTypes.Headline_Small_303_165:
+                currentType = 14;
                 break;
             case ImageTypes.Main_450_450:
                 currentType = 76;

@@ -6,7 +6,6 @@ import { FilterServiceService } from '../../services/filter-service.service';
 import {
     animate,
     Component,
-    DoCheck,
     ElementRef,
     Input,
     NgZone,
@@ -174,10 +173,8 @@ export class FilterServiceComponent implements OnInit {
         this.setIds();
 
         if (this._sids.length > 0) // has items
-            this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else {
-            this._router.navigate(['/mainfiltered']);
-        }
-
+            this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else
+            this._router.navigate(['/']);
     }
     private getCookieData() {
         this._sids = this._cookie.getNanaCookie();
