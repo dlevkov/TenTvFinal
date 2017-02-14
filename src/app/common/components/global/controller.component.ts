@@ -23,7 +23,7 @@ export class Controller implements OnInit {
         this._router.events.forEach((x) => {
             // Do whatever in here
             if (x instanceof NavigationStart) {
-                this._nanaRouteRef.invokeRouteEvent(x.url, this.isArticle(x.url), this.isSection(x.url), this.isTwitter(x.url), null);
+                this._nanaRouteRef.invokeRouteEvent(x.url, this.isArticle(x.url), this.isSection(x.url), this.isTwitter(x.url), null, this.isFiltered(x.url));
             }
         });
         this._router.events
@@ -57,6 +57,9 @@ export class Controller implements OnInit {
         });
     }
 
+    private isFiltered(url: string) {
+        return url.search('mainfiltered') >= 0;
+    }
 
     private isArticle(url: string) {
         return false; // Article part handeled in Article.component
