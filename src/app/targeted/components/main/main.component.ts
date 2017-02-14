@@ -34,6 +34,7 @@ export class MainComponent implements OnInit, OnDestroy {
     constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
         this._service = new MainService(this.http);
         this._cookie = new Cookies(cookieService);
+        this.seed = new Date().getTime().toString();
     }
 
     public generateDfpId(): number {
@@ -61,7 +62,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     public getItems() {
         this._subscriber = this._service
-            .GetItemsByUri('TenTvAppFront/main?%24orderby=DisplayOrder%20asc')
+            .GetItemsByUri('TenTvAppFront/main?%24orderby=DisplayOrder%20asc%2CLastModifyDate%20desc')
             .subscribe((data) => {
                 this.item = data;
                 this.item.isFiltered = this.isFiltered;

@@ -13,7 +13,8 @@ import {
     state,
     style,
     transition,
-    trigger
+    trigger,
+    DoCheck
 } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
@@ -174,7 +175,7 @@ export class FilterServiceComponent implements OnInit {
 
         if (this._sids.length > 0) // has items
             this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else
-            this._router.navigate(['/']);
+            this._router.navigate(['/mainfiltered']);
     }
     private getCookieData() {
         this._sids = this._cookie.getNanaCookie();
