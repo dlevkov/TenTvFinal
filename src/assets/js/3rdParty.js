@@ -280,7 +280,7 @@ var nanaRoute = {
     initialized: false,
     routeEvent: document.createEvent("Event"),
 
-    invokeRouteEvent: function(url, isArticle, isPromoted, isTwitter, articleData) {
+    invokeRouteEvent: function(url, isArticle, isPromoted, isTwitter, articleData, isFiltered) {
         //invoke
         if (!this.initialized) return false;
         this.routeEvent.routeUrl = url;
@@ -288,6 +288,7 @@ var nanaRoute = {
         this.routeEvent.isPromoted = isPromoted;
         this.routeEvent.isTwitter = isTwitter;
         this.routeEvent.articleData = articleData;
+        this.routeEvent.isFiltered = isFiltered;
         document.dispatchEvent(this.routeEvent);
     },
 
@@ -326,7 +327,8 @@ var castTimeHelper = {
             isArticle: data.isArticle,
             isPromoted: data.isPromoted,
             isTwitter: data.isTwitter,
-            articleData: data.articleData
+            articleData: data.articleData,
+            isFiltered: data.isFiltered
         };
         if (castTimeHelper.platform === "android" && typeof Android !== "undefined") {
             Android.webPageUpdated(JSON.stringify(castTimeHelper.routerHelper));
