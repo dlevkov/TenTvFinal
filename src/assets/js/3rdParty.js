@@ -105,6 +105,7 @@ var nanaHelper = {
     maxFontSize: 50,
     minFontSize: 16,
     fontInterval: 2,
+    currentLineHeight: 20,
     getCssPropertyValue: function(cssProp) {
         var currentSelector = document.querySelector(this.fontSelectors[1]);
         var currentSelectorStyle = window.getComputedStyle(currentSelector, null).getPropertyValue(cssProp);
@@ -114,16 +115,19 @@ var nanaHelper = {
 
     changeFontSize: function(zoomin) {
         this.currentFontSize = parseInt(this.getCssPropertyValue('font-size'));
+        this.currentLineHeight = parseInt(this.getCssPropertyValue('font-size'));
         console.log('currentFontSize', this.currentFontSize)
         if ((this.currentFontSize >= this.maxFontSize && zoomin) || (this.currentFontSize <= this.minFontSize && !zoomin))
             return false;
         var zoomI = zoomin ? 1 : -1;
         this.currentFontSize += (this.fontInterval * zoomI);
+        this.lineHeight += (this.fontInterval * zoomI);
         for (var key in this.fontSelectors) {
             var selectors = document.querySelectorAll(this.fontSelectors[key]);
             selectors.forEach(function(selector) {
                 if (selector) {
                     selector.style.fontSize = this.currentFontSize + 'px';
+                    selector.style.lineHeight = this.currentLineHeight + 'px';
                 }
             }, this);
         }
@@ -185,7 +189,7 @@ function AdUnitsCollection() {
     //
     this.initGeneral = function() {
         googletag.cmd.push(function() {
-            for (let i = 0; i < AdUnitsCollectionIndex.list.length; i++) {
+            for (var i = 0; i < AdUnitsCollectionIndex.list.length; i++) {
                 var unit = AdUnitsCollectionIndex.list[i];
 
                 if (unit.initialized) return false;
@@ -213,6 +217,54 @@ function AdUnitsCollection() {
                 unit.initialized = true;
             }
 
+        });
+    };
+
+    //
+    this.validPosition = function() {
+        var res = true;
+        res = document.getElementById(this.slotName) !== null ? true : false;
+        return res;
+    };
+    this.slotName = "";
+    this.slot = null;
+    this.objectName = "main";
+    this.adSize = [];
+    this.adUnitName = "";
+    this.initialized = false;
+
+    this.init = function() {
+        this.initGeneral();
+    };
+
+    //
+    this.initGeneral = function() {
+        googletag.cmd.push(function() {
+            var unit = AdUnitsCollectionIndex.list[AdUnitsCollectionIndex.currentId];
+
+            if (unit.initialized) return false;
+            // Infinite scroll requires SRA
+            googletag.pubads().enableSingleRequest();
+
+            // Disable initial load, we will use refresh() to fetch ads.
+            // Calling this function means that display() calls just
+            // register the slot as ready, but do not fetch ads for it.
+            googletag.pubads().disableInitialLoad();
+
+            // Enable services
+            googletag.enableServices();
+
+
+
+
+            unit.slot = googletag.defineSlot(unit.adUnitName, unit.adSize, unit.slotName).addService(googletag.pubads());
+            // Display has to be called before
+            // refresh and after the slot div is in the page.
+            googletag.display(unit.slotName);
+            googletag.pubads().refresh([unit.slot]);
+            googletag.pubads().collapseEmptyDivs(true);
+
+            unit.initialized = true;
         });
     };
 
