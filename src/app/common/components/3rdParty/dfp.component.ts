@@ -11,7 +11,7 @@ import { Maavaron } from './maavaron.component';
 })
 
 export class DfpMain implements AfterViewInit {
-    @Input() public  serviceName: string = '10tv';
+    @Input() public serviceName: string = '10tv';
     @Input() public placeHolderId: string = '';
     @Input() public dfpObjectName: string = 'main';
     @Input() public dfpStyle: string = '';
@@ -32,10 +32,14 @@ export class DfpMain implements AfterViewInit {
 
     public ngAfterViewInit() {
 
-        this.generateDfpParams();
-        let unit = this.setDfpParams();
-        // reinit dfp
-        this._adUnitsCollectionIndex.init();
+        setTimeout(() => {
+            this.generateDfpParams();
+            let unit = this.setDfpParams();
+            // reinit dfp
+            this._adUnitsCollectionIndex.init();
+        }, 2000);
+
+
 
     }
 
