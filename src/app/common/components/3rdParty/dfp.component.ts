@@ -32,12 +32,12 @@ export class DfpMain implements AfterViewInit {
 
     public ngAfterViewInit() {
 
-        setTimeout(() => {
+        //setTimeout(() => {
             this.generateDfpParams();
             let unit = this.setDfpParams();
             // reinit dfp
             this._adUnitsCollectionIndex.init();
-        }, 2000);
+        //}, 2000);
 
 
 

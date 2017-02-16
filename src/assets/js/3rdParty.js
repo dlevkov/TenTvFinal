@@ -226,54 +226,6 @@ function AdUnitsCollection() {
         res = document.getElementById(this.slotName) !== null ? true : false;
         return res;
     };
-    this.slotName = "";
-    this.slot = null;
-    this.objectName = "main";
-    this.adSize = [];
-    this.adUnitName = "";
-    this.initialized = false;
-
-    this.init = function() {
-        this.initGeneral();
-    };
-
-    //
-    this.initGeneral = function() {
-        googletag.cmd.push(function() {
-            var unit = AdUnitsCollectionIndex.list[AdUnitsCollectionIndex.currentId];
-
-            if (unit.initialized) return false;
-            // Infinite scroll requires SRA
-            googletag.pubads().enableSingleRequest();
-
-            // Disable initial load, we will use refresh() to fetch ads.
-            // Calling this function means that display() calls just
-            // register the slot as ready, but do not fetch ads for it.
-            googletag.pubads().disableInitialLoad();
-
-            // Enable services
-            googletag.enableServices();
-
-
-
-
-            unit.slot = googletag.defineSlot(unit.adUnitName, unit.adSize, unit.slotName).addService(googletag.pubads());
-            // Display has to be called before
-            // refresh and after the slot div is in the page.
-            googletag.display(unit.slotName);
-            googletag.pubads().refresh([unit.slot]);
-            googletag.pubads().collapseEmptyDivs(true);
-
-            unit.initialized = true;
-        });
-    };
-
-    //
-    this.validPosition = function() {
-        var res = true;
-        res = document.getElementById(this.slotName) !== null ? true : false;
-        return res;
-    };
 }
 
 var nanaRoute = {
