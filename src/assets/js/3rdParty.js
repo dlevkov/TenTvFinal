@@ -111,7 +111,7 @@ var nanaHelper = {
         var currentSelectorStyle = window.getComputedStyle(currentSelector, null).getPropertyValue(cssProp);
         return currentSelectorStyle;
     },
-    fontSelectors: ['.rsvp_article_inner_content p:not(.oedoopror)', '.rsvp_article_body_h1', '.rsvp_article_body_h2', '.rsvp_feed_item_title', '.rsvp_article_inner_content span'],
+    fontSelectors: ['.rsvp_article_inner_content p:not(.oedoopror)','.rsvp_article_inner_content strong', '.rsvp_article_body_h1', '.rsvp_article_body_h2', '.rsvp_feed_item_title', '.rsvp_article_inner_content span'],
 
     changeFontSize: function(zoomin) {
         this.currentFontSize = parseInt(this.getCssPropertyValue('font-size'));
