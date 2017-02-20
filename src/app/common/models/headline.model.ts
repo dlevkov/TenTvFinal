@@ -1,3 +1,4 @@
+import { flatten } from '@angular/router/src/utils/collection';
 /**
  * MainModel
  */
@@ -26,7 +27,16 @@ export class HeadlineModel {
     public PairStart: boolean = false;
     public ImageTimeout: number = -1;
 
-     constructor(parameters) {
+    public isMain: boolean = false;
+    public isTopFour: boolean = false;
+    public isSmall: boolean = false;
+    public isBig: boolean = false;
+    public isAlert: boolean = false;
+    public isAd: boolean = false;
+    public isAdSecond: boolean = false;
+    public isPair: boolean = false;
+
+    constructor(parameters) {
         this.DestArticleID = parameters.DestArticleID;
         this.DisplayOrder = parameters.DisplayOrder;
         this.Title = parameters.Title;
@@ -44,6 +54,15 @@ export class HeadlineModel {
         this.CounterId = parameters.Id;
         this.HeadlineType = this.getTypeString;
         this.ImageTimeout = parameters.ImageTimeout;
+
+        this.isMain = this.CounterId === 0;
+        this.isTopFour = this.isMain || (this.CounterId >= 1 && this.CounterId <= 3);
+        this.isSmall = !this.isTopFour && (this.HeadlineType === 'Small' || this.HeadlineType === 'Video');
+        this.isBig = !this.isMain && (this.HeadlineType === 'Big' || this.isTopFour);
+        this.isAlert = !this.isTopFour && this.HeadlineType === 'Alert';
+        this.isAd = !this.isTopFour && this.HeadlineType === 'Ad' && !this.AdsSecond;
+        this.isAdSecond = !this.isTopFour && this.HeadlineType === 'Ad' && this.AdsSecond;
+        this.isPair = !this.isTopFour && this.HeadlineType === 'Pair' && this.PairStart;
     }
 
     public isDfp(i: any, TopFourEndIndex: any, AlertsEndIndex: any, isFiltered: boolean): boolean {
@@ -58,40 +77,9 @@ export class HeadlineModel {
         return this.HeadlineType;
     }
 
-    get isMain(): boolean {
-        return this.CounterId === 0;
-    }
-    get isTopFour(): boolean {
-        return this.isMain || (this.CounterId >= 1 && this.CounterId <= 3);
-    }
-
-    get isSmall(): boolean {
-        return !this.isTopFour && (this.HeadlineType === 'Small' || this.HeadlineType === 'Video');
-    }
-
-    get isBig(): boolean {
-        return !this.isMain && (this.HeadlineType === 'Big' || this.isTopFour);
-    }
-
-    get isAlert(): boolean {
-        return !this.isTopFour && this.HeadlineType === 'Alert';
-    }
-
-    get isAd(): boolean {
-        return !this.isTopFour && this.HeadlineType === 'Ad' && !this.AdsSecond;
-    }
-
-    get isAdSecond(): boolean {
-        return !this.isTopFour && this.HeadlineType === 'Ad' && this.AdsSecond;
-    }
-
-    get isPair(): boolean {
-        return !this.isTopFour && this.HeadlineType === 'Pair' && this.PairStart;
-    }
-
     get getTypeString(): string {
         return Constants.HEADLINETYPES[this.DisplaySigns];
     }
 
-   
+
 }
