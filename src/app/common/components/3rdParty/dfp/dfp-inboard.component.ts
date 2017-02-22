@@ -1,5 +1,5 @@
 import { Constants } from '../../../Constants';
-import { DfpUnitManager } from './dfp-basic';
+import { DfpUnitManager, IResetable } from './dfp-basic';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
     `,
     styles: ['.dfp-inboard {display:block}']
 })
-export class DfpInboardComponent extends DfpUnitManager implements OnInit {
+export class DfpInboardComponent extends DfpUnitManager implements OnInit, IResetable {
     public placeHolderId: string = '';
     public _isDisabled: boolean = false;
     @Input() public seed: string;
@@ -38,4 +38,6 @@ export class DfpInboardComponent extends DfpUnitManager implements OnInit {
         this.placeHolderId = 'div-gpt-ad-' + this.seed;
         this.AddDfpUnit('inboard', Constants.DFPADUNITSNAMES['inboard'], this.placeHolderId, this.GetAdUnitSize());
     }
+
+    public ResetCounter() { }
 }

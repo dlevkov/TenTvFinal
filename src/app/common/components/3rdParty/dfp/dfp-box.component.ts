@@ -1,5 +1,5 @@
 import { Constants } from '../../../Constants';
-import { DfpUnitManager } from './dfp-basic';
+import { DfpUnitManager, IResetable } from './dfp-basic';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -14,13 +14,14 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
                         margin-bottom:10px;}
          `]
 })
-export class DfpBoxComponent extends DfpUnitManager implements OnInit {
+export class DfpBoxComponent extends DfpUnitManager implements OnInit, IResetable {
     public placeHolderId: string = '';
     public _isDisabled: boolean = false;
     @Input() public ArticleId: string;
 
     constructor(private injector: Injector) {
         super();
+        super.AddInstance(this);
         this.ArticleId = this.injector.get('ArticleId');
     }
 
@@ -40,5 +41,8 @@ export class DfpBoxComponent extends DfpUnitManager implements OnInit {
     public ngOnInit(): void {
         this.placeHolderId = 'ad-div-box' + this.ArticleId;
         this.AddDfpUnit('article', Constants.DFPADUNITSNAMES['box'], this.placeHolderId, this.GetAdUnitSize());
+    }
+
+    public ResetCounter() {
     }
 }

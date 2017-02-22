@@ -1,6 +1,6 @@
 import { Constants } from '../../../Constants';
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { DfpUnitManager } from './dfp-basic';
+import { DfpUnitManager, IResetable } from './dfp-basic';
 import { DfpStripComponent } from './dfp-strip.component';
 
 @Component({
@@ -16,7 +16,7 @@ import { DfpStripComponent } from './dfp-strip.component';
                                      background-color:transparent;}
                           `]
 })
-export class InArticleListComponent extends DfpUnitManager implements OnInit {
+export class InArticleListComponent extends DfpUnitManager implements OnInit, IResetable {
     protected static internalCounter = 0;
     private static dfpId: number = 1;
     @Input() public seed: string;
@@ -27,6 +27,7 @@ export class InArticleListComponent extends DfpUnitManager implements OnInit {
 
     constructor(private injector: Injector) {
         super();
+        super.AddInstance(this);
         this.seed = this.injector.get('seed');
         this.placeHolderId = 'ad-div-upper-strip-' + this.counter + '-' + this.seed;
     }
@@ -46,6 +47,11 @@ export class InArticleListComponent extends DfpUnitManager implements OnInit {
                 break;
         }
         return res;
+    }
+
+    public ResetCounter() {
+        InArticleListComponent.internalCounter = 0;
+        InArticleListComponent.dfpId = 1;
     }
     protected setVisibility() {
         this._isDisabled = !((InArticleListComponent.internalCounter <= (5 * 4)) && ((InArticleListComponent.internalCounter + 1) % 5 === 0));

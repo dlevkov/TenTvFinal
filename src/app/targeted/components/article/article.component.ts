@@ -1,3 +1,4 @@
+import { DfpUnitManager } from '../../../common/components/3rdParty/dfp/dfp-basic';
 import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
 import { DfpBoxComponent } from '../../../common/components/3rdParty/dfp/dfp-box.component';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -37,7 +38,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
     private _nanaRouteRef: any;
 
     constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone,
-        private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+                private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
         window.angularComponentRef = { component: this, zone: _ngZone };
         this._nanaRouteRef = window['nanaRoute'];
         this._service = new ArticleService(http);
@@ -53,7 +54,6 @@ export class ArticleComponent implements OnDestroy, OnInit {
                         this._loadingUrl = this.item.TitlePic;
                         this.ScrollToTop();
                         this.sendArticleData();
-                        this.setConcreteComponents();
                     });
             });
     }
@@ -66,6 +66,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
     public ngOnInit() {
         this.state = (this.state === 'in' ? 'out' : 'in');
         console.log('state init:' + this.state);
+        this.setConcreteComponents();
     }
 
     public ScrollToTop() {
@@ -90,12 +91,13 @@ export class ArticleComponent implements OnDestroy, OnInit {
         this.inArticleData = {
             component: DfpBoxComponent,
             inputs: {
-                ArticleId: this.item.ArticleID
+                ArticleId: this.seed
             }
         };
         setTimeout(() => {
             window['AdUnitsCollectionIndex'].init();
             console.log('internal init');
+            DfpUnitManager.ResetCounters();
         }, 5000);
         console.log('external init');
 

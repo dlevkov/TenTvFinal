@@ -1,6 +1,6 @@
 import { MainModel } from '../../../../targeted/models/main.model';
 import { Constants } from '../../../Constants';
-import { DfpUnitManager } from './dfp-basic';
+import { DfpUnitManager, IResetable } from './dfp-basic';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
                           background-color:transparent;}
                           `]
 })
-export class DfpStripComponent extends DfpUnitManager implements OnInit {
+export class DfpStripComponent extends DfpUnitManager implements OnInit, IResetable {
     protected static internalCounter: number = 0;
     @Input() public seed: string;
     @Input() public dfpId: number;
@@ -26,6 +26,7 @@ export class DfpStripComponent extends DfpUnitManager implements OnInit {
 
     constructor(private injector: Injector) {
         super();
+        super.AddInstance(this);
         this.seed = this.injector.get('seed');
         this.dfpId = this.injector.get('dfpId');
         this.mainModel = this.injector.get('mainModel');
@@ -39,7 +40,7 @@ export class DfpStripComponent extends DfpUnitManager implements OnInit {
 
     public ngOnInit(): void {
         this.setVisibility();
-        if (!this._isDisabled )
+        if (!this._isDisabled)
             super.AddDfpUnit('main', Constants.DFPADUNITSNAMES['strip'] + this.dfpId, this.placeHolderId, this.GetAdUnitSize());
     }
 
@@ -55,6 +56,10 @@ export class DfpStripComponent extends DfpUnitManager implements OnInit {
                 break;
         }
         return res;
+    }
+
+    public ResetCounter() {
+        DfpStripComponent.internalCounter = 0;
     }
 
     protected setVisibility() {

@@ -1,3 +1,4 @@
+import { DfpUnitManager } from '../../../common/components/3rdParty/dfp/dfp-basic';
 import { DfpStripComponent } from '../../../common/components/3rdParty/dfp/dfp-strip.component';
 import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
 import { CookieService } from 'angular2-cookie/core';
@@ -110,6 +111,8 @@ export class MainComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             window['AdUnitsCollectionIndex'].init();
             console.log('internal init');
+            DfpUnitManager.ResetCounters();
+
         }, 5000);
         console.log('external init');
 
