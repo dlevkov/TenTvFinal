@@ -38,7 +38,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
     private _cookie: Cookies;
 
+    private _nanaRouteRef: any;
+
     constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
+        this._nanaRouteRef = window['nanaRoute'];
         this._service = new MainService(this.http);
         this._cookie = new Cookies(cookieService);
         this.seed = new Date().getTime().toString();
@@ -74,6 +77,7 @@ export class MainComponent implements OnInit, OnDestroy {
                 this.item = data;
                 this.item.isFiltered = this.isFiltered;
                 this.setConcreteComponents();
+                this.sendMainData();
             });
     }
 
@@ -116,5 +120,9 @@ export class MainComponent implements OnInit, OnDestroy {
         }, 5000);
         console.log('external init');
 
+    }
+
+    private sendMainData() {
+        this._nanaRouteRef.invokeRouteEvent('/main', false, false, false, null, this.isFiltered);
     }
 }
