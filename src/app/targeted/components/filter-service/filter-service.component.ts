@@ -175,7 +175,7 @@ export class FilterServiceComponent implements OnInit {
 
         if (this._sids.length > 0) // has items
             this._router.navigate(['/mainfiltered/' + this._generatedId, { data: this._sids }]); else
-            this._router.navigate(['/mainfiltered']);
+            this._router.navigate(['/emptyFilter']);
     }
     private getCookieData() {
         this._sids = this._cookie.getNanaCookie();
