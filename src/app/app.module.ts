@@ -1,3 +1,4 @@
+import { DfpInSectionStripComponent } from './common/components/3rdParty/dfp/dfp-in-section-strip.component';
 import { DfpBoxComponent } from './common/components/3rdParty/dfp/dfp-box.component';
 import { InArticleListComponent } from './common/components/3rdParty/dfp/dfp-in-article-list.component';
 import { DfpStripComponent } from './common/components/3rdParty/dfp/dfp-strip.component';
@@ -36,7 +37,6 @@ import { HeadlineAdComponent } from './common/components/headlines/headline-ad.c
 import { HeadlineAdSecondComponent } from './common/components/headlines/headline-adsecond.component';
 import { HeadlinePairComponent } from './common/components/headlines/headline-pair.component';
 import { TaboolaMain } from './common/components/3rdParty/taboola.component';
-import { DfpMain } from './common/components/3rdParty/dfp.component';
 import { Maavaron } from './common/components/3rdParty/maavaron.component';
 import { ArticlesListComponent } from './targeted/components/articles-list/artilcles-list.component';
 import { Video } from './common/components/video/video.component';
@@ -102,7 +102,7 @@ type StoreType = {
     ThirdPartyComponent,
     TaboolaMain,
     TwitterToolbarComponent, TwitterComponent,
-    DfpMain, Maavaron,
+    Maavaron,
     ScrollTop,
     ArticlesListComponent,
     FilterServiceComponent,
@@ -117,7 +117,8 @@ type StoreType = {
     DfpInboardComponent,
     DfpStripComponent,
     InArticleListComponent,
-    DfpBoxComponent
+    DfpBoxComponent,
+    DfpInSectionStripComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
