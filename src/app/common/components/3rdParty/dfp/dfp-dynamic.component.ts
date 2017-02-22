@@ -1,3 +1,4 @@
+import { DfpInSectionStripComponent } from './dfp-in-section-strip.component';
 import { DfpBoxComponent } from './dfp-box.component';
 import { InArticleListComponent } from './dfp-in-article-list.component';
 import { DfpStripComponent } from './dfp-strip.component';
@@ -7,7 +8,13 @@ import { DfpInboardComponent } from './dfp-inboard.component';
 
 @Component({
     selector: 'dynamic-dfp-component',
-    entryComponents: [DfpInboardComponent, DfpStripComponent, InArticleListComponent, DfpBoxComponent], // Reference to the components must be here in order to dynamically create them
+    entryComponents: [
+        DfpInboardComponent,
+        DfpStripComponent,
+        InArticleListComponent,
+        DfpBoxComponent,
+        DfpInSectionStripComponent
+    ], // Reference to the components must be here in order to dynamically create them
     template: `<div #dynamicComponentContainer></div>`,
 })
 export class DynamicComponent {

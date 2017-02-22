@@ -1,26 +1,25 @@
 <div id="SectionMainContainer">
 
-    <div class="rsvp_image_with_caption" *ngIf="item?.IconURL2">
-        <a [routerLink]="['article_gallery.html']"></a>
-        <img [src]='item?.ImageFile' alt="">
+  <div class="rsvp_image_with_caption" *ngIf="item?.IconURL2">
+    <a [routerLink]="['article_gallery.html']"></a>
+    <img [src]='item?.ImageFile' alt="">
+  </div>
+  <div id="ArticleListContainer">
+    <!-- category title start  -->
+    <div class="rsvp_category_title_outer">
+      <div class="rsvp_category_title" [ngStyle]="{'color': item?.Headlines[0].StripeColor, 'border-bottom-color': item?.Headlines[0].StripeColor}">
+        {{item?.Headlines[0].HebServiceName}}
+      </div>
+      <div style="clear:both;"></div>
     </div>
-    <div id="ArticleListContainer">
-        <!-- category title start  -->
-        <div class="rsvp_category_title_outer">
-            <div class="rsvp_category_title" [ngStyle]="{'color': item?.Headlines[0].StripeColor, 'border-bottom-color': item?.Headlines[0].StripeColor}">
-                {{item?.Headlines[0].HebServiceName}}
-            </div>
-            <div style="clear:both;"></div>
-        </div>
-        <div style="clear:both;"></div>
-        <!-- category title start  -->
-        <div *ngFor="let headline of item?.Headlines">
-            <dfp *ngIf="headline?.DisplayOrder !== 0 && headline?.DisplayOrder%4 === 0" [placeHolderId]='"ad-div-upper-strip-" + headline?.DisplayOrder' [dfpId]='generateDfpId(headline?.DisplayOrder)' [dfpStyle]='{"width":"320px", "margin":"0 auto","margin-top":"10px","margin-bottom":"10px", "background-color":"transparent"}'
-                [dfpObjectName]='"main"'></dfp>
-            <headline-big [item]='headline' *ngIf="headline?.DisplayOrder%4 === 0"></headline-big>
-            <headline-small [item]='headline' *ngIf='headline?.DisplayOrder%4 !== 0'></headline-small>
+    <div style="clear:both;"></div>
+    <!-- category title start  -->
+    <div *ngFor="let headline of item?.Headlines">
+      <dynamic-dfp-component *ngIf="headline?.DisplayOrder !== 0 && headline?.DisplayOrder%4 === 0" [componentData]="incomeData"></dynamic-dfp-component>
+      <headline-big [item]='headline' *ngIf="headline?.DisplayOrder%4 === 0"></headline-big>
+      <headline-small [item]='headline' *ngIf='headline?.DisplayOrder%4 !== 0'></headline-small>
 
-        </div>
     </div>
-    <tag-manager></tag-manager>
+  </div>
+  <tag-manager></tag-manager>
 </div>
