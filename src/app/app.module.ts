@@ -1,3 +1,8 @@
+import { DfpBoxComponent } from './common/components/3rdParty/dfp/dfp-box.component';
+import { InArticleListComponent } from './common/components/3rdParty/dfp/dfp-in-article-list.component';
+import { DfpStripComponent } from './common/components/3rdParty/dfp/dfp-strip.component';
+import { DfpInboardComponent } from './common/components/3rdParty/dfp/dfp-inboard.component';
+import { DynamicComponent } from './common/components/3rdParty/dfp/dfp-dynamic.component';
 import { NgModule, ApplicationRef, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -107,7 +112,12 @@ type StoreType = {
     PreFilterMessage,
     Video,
     Controller,
-    GoogleTagManager
+    GoogleTagManager,
+    DynamicComponent,
+    DfpInboardComponent,
+    DfpStripComponent,
+    InArticleListComponent,
+    DfpBoxComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

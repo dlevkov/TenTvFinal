@@ -9,8 +9,8 @@ export class MainModel {
     PairtHeadlines: HeadlineModel[] = [];
     AlertCounter: number = 0;
     ItemCounter: number = 0;
-    TopFourEndIndex: number = -1;
-    AlertsEndIndex: number = -1;
+    TopFourEndIndex: number = 0;
+    AlertsEndIndex: number = 0;
     isFiltered: boolean = false;
     sids: number[] = [];
 
@@ -50,7 +50,7 @@ export class MainModel {
     }
 
     setTopFourEndIndex() {
-        this.TopFourEndIndex = 3 + this.AlertHeadlines.length;
+        this.TopFourEndIndex = 4 + this.AlertHeadlines.length;
     }
 
     setAlertsEndIndex() {

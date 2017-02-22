@@ -1,3 +1,5 @@
+import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
+import { DfpBoxComponent } from '../../../common/components/3rdParty/dfp/dfp-box.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { ArticleShareData } from '../../models/article-share-data.model';
@@ -25,7 +27,8 @@ export class ArticleComponent implements OnDestroy, OnInit {
     public item: ArticleModel;
     public state: string = 'in';
     public seed: string;
-
+    public inArticleData: any;
+    public inboardData: any;
     private _currentId: number;
     private _service: ArticleService;
     private _subscriber: Subscription;
@@ -50,6 +53,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
                         this._loadingUrl = this.item.TitlePic;
                         this.ScrollToTop();
                         this.sendArticleData();
+                        this.setConcreteComponents();
                     });
             });
     }
@@ -73,6 +77,27 @@ export class ArticleComponent implements OnDestroy, OnInit {
         let elem = this.myElement.nativeElement;
         elem.classList.remove('load-image-show');
         elem.classList.add('load-image-hidden');
+
+    }
+
+    private setConcreteComponents() {
+        this.inboardData = {
+            component: DfpInboardComponent,
+            inputs: {
+                seed: this.seed
+            }
+        };
+        this.inArticleData = {
+            component: DfpBoxComponent,
+            inputs: {
+                ArticleId: this.item.ArticleID
+            }
+        };
+        setTimeout(() => {
+            window['AdUnitsCollectionIndex'].init();
+            console.log('internal init');
+        }, 5000);
+        console.log('external init');
 
     }
 

@@ -1,5 +1,5 @@
 <maavaron [suffix]='item?.ArticleID'></maavaron>
-<dfp [placeHolderId]='"div-gpt-ad-" + seed' [dfpStyle]='{"display":"block"}' [dfpObjectName]='"inboard"'></dfp>
+<dynamic-dfp-component [componentData]="inboardData"></dynamic-dfp-component>
 <div class="rsvp_fullwidth" [@transition]='state'>
     <div *ngIf='item?.StripImagePathShow' class="rsvp_image_with_caption">
         <!--<a href="article_gallery.html" class="rsvp_imag_expand"></a>-->
@@ -32,7 +32,7 @@
         <br>
         <paragraph [item]='paragraph' [index]='i' *ngFor="let paragraph of item?.Paragraphs; let i = index"></paragraph>
     </div>
-    <dfp [placeHolderId]='"ad-div-box" + item?.ArticleID' [dfpStyle]='{"width":"300px", "margin":"0 auto","margin-top":"10px","margin-bottom":"10px"}' [dfpObjectName]='"article"'></dfp>
+     <dynamic-dfp-component [componentData]="inArticleData"></dynamic-dfp-component>
     <taboola [placeHolderId]='"taboola-under-article"' [placement]='"Under Article"' [mode]='"thumbnails-c"' [objectType]='"article"'></taboola>
     <main [showTwitter]='false' [isInArticle]='true'></main>
     <tag-manager></tag-manager>

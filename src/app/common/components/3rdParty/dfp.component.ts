@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Constants } from '../../Constants';
 import { Maavaron } from './maavaron.component';
 
@@ -29,18 +29,11 @@ export class DfpMain implements AfterViewInit {
     public _count: number = 0;
     public _adUnitsCollectionIndex: any;
 
-
     public ngAfterViewInit() {
-
-        //setTimeout(() => {
-            this.generateDfpParams();
-            let unit = this.setDfpParams();
-            // reinit dfp
-            this._adUnitsCollectionIndex.init();
-        //}, 2000);
-
-
-
+        this.generateDfpParams();
+        let unit = this.setDfpParams();
+        // reinit dfp
+        this._adUnitsCollectionIndex.init();
     }
 
     public setDfpParams(): any {
@@ -156,12 +149,15 @@ export class DfpMain implements AfterViewInit {
                 break;
             default:
             //
-
         }
-
-
     }
-
+    // private setDfp(): void {
+    //     let res: boolean = this.setCounter !== 0 && (this.setCounter === this.mainModel.TopFourEndIndex || this.setCounter === this.mainModel.AlertsEndIndex);
+    //     if (!this.isFiltered)
+    //         res = res || (this.setCounter >= this.mainModel.TopFourEndIndex && (this.setCounter - this.mainModel.TopFourEndIndex) % 5 === 0);
+    //     console.log('current dfp: ' + res);
+    //     this.isDfp.emit(res);
+    // }
 
 }
 

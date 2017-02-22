@@ -204,9 +204,6 @@ function AdUnitsCollection() {
                 // Enable services
                 googletag.enableServices();
 
-
-
-
                 unit.slot = googletag.defineSlot(unit.adUnitName, unit.adSize, unit.slotName).addService(googletag.pubads());
                 // Display has to be called before
                 // refresh and after the slot div is in the page.

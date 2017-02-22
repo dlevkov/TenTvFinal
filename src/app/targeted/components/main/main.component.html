@@ -1,5 +1,5 @@
 <div class="rsvp_fullwidth" style="margin-bottom: 100px;" [@transition]='state'>
-  <dfp *ngIf="!isInArticle" [placeHolderId]='"div-gpt-ad-" + seed' [dfpStyle]='{"display":"block"}' [dfpObjectName]='"inboard"'></dfp>
+  <dynamic-dfp-component *ngIf="!isInArticle" [componentData]="inboardData"></dynamic-dfp-component>
   <div *ngFor="let headline of item?.Headlines; let i=index" [class]='headline.getClass(i)'>
     <headline-main [item]='headline' *ngIf="headline.isMain"></headline-main>
     <headline-big [item]='headline' *ngIf="headline.isBig && headline.isTopFour"></headline-big>
@@ -11,9 +11,7 @@
       <headline-ad [item]='headline' *ngIf="headline.isAd"></headline-ad>
       <headline-adsecond [item]='headline' *ngIf="headline.isAdSecond"></headline-adsecond>
     </div>
-    <dfp *ngIf="!isInArticle && headline.isDfp(i,item?.TopFourEndIndex,item?.AlertsEndIndex,item?.isFiltered)" [placeHolderId]='"ad-div-upper-strip-" + i + "-" + seed'
-      [dfpId]='generateDfpId()' [dfpStyle]='{"width":"320px", "margin":"0 auto","margin-top":"10px","margin-bottom":"10px", "background-color":"transparent"}'
-      [dfpObjectName]='"main"'></dfp>
+      <dynamic-dfp-component *ngIf="!isInArticle" [componentData]="stripData"></dynamic-dfp-component>
   </div>
   <articles-list *ngIf="item?.isFiltered" [sids]=[(item?.sids)] [isInArticle]='isInArticle'></articles-list>
   <twitter-toolbar *ngIf='showTwitter'></twitter-toolbar>

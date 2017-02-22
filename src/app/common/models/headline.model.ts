@@ -1,3 +1,4 @@
+import { MainModel } from '../../targeted/models/main.model';
 import { flatten } from '@angular/router/src/utils/collection';
 /**
  * MainModel
@@ -36,6 +37,7 @@ export class HeadlineModel {
     public isAdSecond: boolean = false;
     public isPair: boolean = false;
 
+
     constructor(parameters) {
         this.DestArticleID = parameters.DestArticleID;
         this.DisplayOrder = parameters.DisplayOrder;
@@ -63,14 +65,6 @@ export class HeadlineModel {
         this.isAd = !this.isTopFour && this.HeadlineType === 'Ad' && !this.AdsSecond;
         this.isAdSecond = !this.isTopFour && this.HeadlineType === 'Ad' && this.AdsSecond;
         this.isPair = !this.isTopFour && this.HeadlineType === 'Pair' && this.PairStart;
-    }
-
-    public isDfp(i: any, TopFourEndIndex: any, AlertsEndIndex: any, isFiltered: boolean): boolean {
-        let res: boolean = false;
-        if (isFiltered)
-            res = i !== 0 && (i === TopFourEndIndex || i === AlertsEndIndex); else
-            res = i !== 0 && (i === TopFourEndIndex || i === AlertsEndIndex || (i >= TopFourEndIndex && (i - TopFourEndIndex) % 5 === 0));
-        return res;
     }
 
     public getClass(i: any): string {

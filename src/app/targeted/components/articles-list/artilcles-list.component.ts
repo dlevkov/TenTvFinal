@@ -1,3 +1,4 @@
+import { InArticleListComponent } from '../../../common/components/3rdParty/dfp/dfp-in-article-list.component';
 import { CookieOptionsArgs, CookieService } from 'angular2-cookie/core';
 import { Component, Input, NgZone, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
@@ -28,6 +29,7 @@ export class ArticlesListComponent implements OnDestroy, OnInit {
     public _currentPage: number = 1;
     public _itemsPerPage: number = 10;
     public showTooltip: boolean = false;
+    public inArticleData: any;
 
     private _cookies: Cookies;
     private sCookieName = 'filterTooltip';
@@ -35,9 +37,11 @@ export class ArticlesListComponent implements OnDestroy, OnInit {
     constructor(public http: Http, public _router: Router, public _ngZone: NgZone, public route: ActivatedRoute, private cookieService: CookieService) {
         this._service = new ArticleListService(this.http);
         this._cookies = new Cookies(cookieService);
+        this.seed = new Date().getTime().toString();
         this._routeSubscriber = this.route.params.subscribe((x) => {
             this.init(x['data']);
         });
+        this.setConcreteComponents();
     }
     public ngOnInit() {
         this.showTooltip = !this.getTooltipCookie() && !this._cookies.isNewUser;
@@ -62,8 +66,6 @@ export class ArticlesListComponent implements OnDestroy, OnInit {
         this.sids.forEach((element, index) => {
             this._url += ('idsList=' + element + '&');
         });
-        ///TenTvAppFront/article-list?idsList=126&%24top=10&%24orderby=DestArticleID%20desc
-        // this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article-list?' + this._url + '$top=' + (this._currentPage++ * this._itemsPerPage) + '&$orderby=DestArticleID desc')
         this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article-list?' + this._url + '$top=' + 100 + '&$orderby=DestArticleID desc')
             .subscribe((d) => {
                 this.items = d;
@@ -86,17 +88,6 @@ export class ArticlesListComponent implements OnDestroy, OnInit {
                     this.items = d;
                 });
     }
-
-    public generateDfpId(id: number): any {
-        let newid = id / 5;
-        return Math.floor(newid + 3);
-    }
-
-    public isDfp(id: number): boolean {
-        // TODO: it's a magic, magic...
-        return id <= (5 * 3) && (id + 1) % 5 === 0;
-    }
-
 
     public toggleFilter() {
         window['castTimeHelper'].toggleServiceFilter();
@@ -128,6 +119,15 @@ export class ArticlesListComponent implements OnDestroy, OnInit {
     private getTooltipCookie(): boolean {
         let cookie = (this.cookieService.get(this.sCookieName));
         return (cookie !== undefined); // if exists - false
+    }
+
+    private setConcreteComponents() {
+        this.inArticleData = {
+            component: InArticleListComponent,
+            inputs: {
+                seed: this.seed
+            }
+        };
     }
 }
 

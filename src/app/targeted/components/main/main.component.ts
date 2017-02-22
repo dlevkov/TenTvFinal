@@ -1,3 +1,5 @@
+import { DfpStripComponent } from '../../../common/components/3rdParty/dfp/dfp-strip.component';
+import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
 import { CookieService } from 'angular2-cookie/core';
 import { MainModel } from '../../models/main.model';
 import { Component, OnInit, Input, NgZone, OnDestroy } from '@angular/core';
@@ -28,6 +30,10 @@ export class MainComponent implements OnInit, OnDestroy {
     public _service: MainService;
     public _subscriber: Subscription;
     public state: string = 'in';
+    public isDfp: boolean = true;
+
+    public inboardData: any;
+    public stripData: any;
 
     private _cookie: Cookies;
 
@@ -66,6 +72,7 @@ export class MainComponent implements OnInit, OnDestroy {
             .subscribe((data) => {
                 this.item = data;
                 this.item.isFiltered = this.isFiltered;
+                this.setConcreteComponents();
             });
     }
 
@@ -82,5 +89,29 @@ export class MainComponent implements OnInit, OnDestroy {
 
     public handleFilter() {
         window['castTimeHelper'].toggleServiceFilter();
+    }
+
+    public setConcreteComponents() {
+        this.inboardData = {
+            component: DfpInboardComponent,
+            inputs: {
+                seed: this.seed
+            }
+        };
+        this.stripData = {
+            component: DfpStripComponent,
+            inputs: {
+                seed: this.seed,
+                dfpObjectName: 'main',
+                dfpId: this.generateDfpId(),
+                mainModel: this.item
+            }
+        };
+        setTimeout(() => {
+            window['AdUnitsCollectionIndex'].init();
+            console.log('internal init');
+        }, 5000);
+        console.log('external init');
+
     }
 }
