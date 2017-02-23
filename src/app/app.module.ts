@@ -62,10 +62,7 @@ import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
 
 // Animated "scroll to element" functionality
-// https://github.com/Nolanus/ng2-page-scroll/issues/35
-// AOT not working YET
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-
 
 // Application wide providers
 const APP_PROVIDERS = [
