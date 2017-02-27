@@ -1,3 +1,4 @@
+import { NanaRouterDataSenderService } from './targeted/services/nanaRouter-data-sender.service';
 import { DfpInSectionStripComponent } from './common/components/3rdParty/dfp/dfp-in-section-strip.component';
 import { DfpBoxComponent } from './common/components/3rdParty/dfp/dfp-box.component';
 import { InArticleListComponent } from './common/components/3rdParty/dfp/dfp-in-article-list.component';
@@ -130,7 +131,8 @@ type StoreType = {
     { provide: CookieService, useFactory: cookieServiceFactory },
     WebApiErrorLogger,
     { provide: ErrorHandler, useClass: CustomErrorHandler },
-    HtmlContentParser
+    HtmlContentParser,
+    NanaRouterDataSenderService
   ]
 })
 

@@ -1,3 +1,4 @@
+import { INanaRouteProvider, NanaRouterDataSenderService } from '../../services/nanaRouter-data-sender.service';
 import { DfpUnitManager } from '../../../common/components/3rdParty/dfp/dfp-basic';
 import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
 import { DfpBoxComponent } from '../../../common/components/3rdParty/dfp/dfp-box.component';
@@ -24,7 +25,7 @@ import { FilterTooltipComponent } from '../filter-service/filter-tooltip.compone
 })
 
 
-export class ArticleComponent implements OnDestroy, OnInit {
+export class ArticleComponent implements OnDestroy, OnInit, INanaRouteProvider {
     public item: ArticleModel;
     public state: string = 'in';
     public seed: string;
@@ -38,9 +39,9 @@ export class ArticleComponent implements OnDestroy, OnInit {
     private _nanaRouteRef: any;
 
     constructor(public route: ActivatedRoute, http: Http, private myElement: ElementRef, private _ngZone: NgZone,
-                private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+        private parserTs: HtmlContentParser, private scrollService: PageScrollService, @Inject(DOCUMENT) private document: any, private nanaRouter: NanaRouterDataSenderService) {
         window.angularComponentRef = { component: this, zone: _ngZone };
-        this._nanaRouteRef = window['nanaRoute'];
+
         this._service = new ArticleService(http);
         this.seed = new Date().getTime().toString();
 
@@ -53,7 +54,7 @@ export class ArticleComponent implements OnDestroy, OnInit {
                         this.parserTs.length = this.item.Paragraphs.length;
                         this._loadingUrl = this.item.TitlePic;
                         this.ScrollToTop();
-                        this.sendArticleData();
+                        this.SendData();
                     });
             });
     }
@@ -72,6 +73,10 @@ export class ArticleComponent implements OnDestroy, OnInit {
     public ScrollToTop() {
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#scrollToTop');
         this.scrollService.start(pageScrollInstance);
+    }
+
+    public SendData() {
+        this.nanaRouter.SendArticleData(this.item);
     }
 
     private animateTransition() {
@@ -101,11 +106,6 @@ export class ArticleComponent implements OnDestroy, OnInit {
         }, 5000);
         console.log('external init');
 
-    }
-
-    private sendArticleData() {
-        this._nanaRouteRef.invokeRouteEvent('/article/' + this.item.ArticleID,
-            true, false, false, new ArticleShareData(this.item.ShareUrl, this.item.Title, this.item.SubTitle));
     }
 
     // ***************************************************************************************************************************//

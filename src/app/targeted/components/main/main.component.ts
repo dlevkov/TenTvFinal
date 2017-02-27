@@ -1,3 +1,4 @@
+import { INanaRouteProvider, NanaRouterDataSenderService } from '../../services/nanaRouter-data-sender.service';
 import { DfpUnitManager } from '../../../common/components/3rdParty/dfp/dfp-basic';
 import { DfpStripComponent } from '../../../common/components/3rdParty/dfp/dfp-strip.component';
 import { DfpInboardComponent } from '../../../common/components/3rdParty/dfp/dfp-inboard.component';
@@ -20,7 +21,7 @@ import { pageTransition } from '../../../animations';
     animations: [pageTransition]
 })
 
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy, INanaRouteProvider {
     @Input() public showTwitter: boolean = true;
     @Input() public isInArticle: boolean = false;
 
@@ -38,10 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     private _cookie: Cookies;
 
-    private _nanaRouteRef: any;
-
-    constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService) {
-        this._nanaRouteRef = window['nanaRoute'];
+    constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService, private nanaRouter: NanaRouterDataSenderService) {
         this._service = new MainService(this.http);
         this._cookie = new Cookies(cookieService);
         this.seed = new Date().getTime().toString();
@@ -77,7 +75,6 @@ export class MainComponent implements OnInit, OnDestroy {
                 this.item = data;
                 this.item.isFiltered = this.isFiltered;
                 this.setConcreteComponents();
-                this.sendMainData();
             });
     }
 
@@ -90,6 +87,7 @@ export class MainComponent implements OnInit, OnDestroy {
         let ids: number[] = this._cookie.getNanaCookie();
         console.log(ids);
         this.isFiltered = (((ids.length > 0 && ids.length !== FilterServiceComponent.filterServices.length) && ids[0] !== 0) ? true : false);
+        this.SendData();
     }
 
     public handleFilter() {
@@ -122,7 +120,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     }
 
-    private sendMainData() {
-        this._nanaRouteRef.invokeRouteEvent('/main', false, false, false, null, this.isFiltered);
+    public SendData() {
+        this.nanaRouter.SendFiltered(this.isFiltered);
     }
 }

@@ -1,3 +1,4 @@
+import { INanaRouteProvider, NanaRouterDataSenderService } from '../../services/nanaRouter-data-sender.service';
 import { DfpUnitManager } from '../../../common/components/3rdParty/dfp/dfp-basic';
 import { DfpInSectionStripComponent } from '../../../common/components/3rdParty/dfp/dfp-in-section-strip.component';
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
@@ -12,7 +13,7 @@ import { GoogleTagManager } from '../../../common/components/3rdParty/googleTagM
     selector: 'section',
     templateUrl: 'section.component.html'
 })
-export class SectionComponent implements OnInit, OnDestroy {
+export class SectionComponent implements OnInit, OnDestroy, INanaRouteProvider {
     public item: SectionModel;
     public incomeData: any;
 
@@ -21,7 +22,7 @@ export class SectionComponent implements OnInit, OnDestroy {
     private _subscriber: Subscription;
     private _dfpId: number = 1;
 
-    constructor(public route: ActivatedRoute, http: Http) {
+    constructor(public route: ActivatedRoute, http: Http, private nanaRouter: NanaRouterDataSenderService) {
         this._service = new SectionService(http);
     }
 
@@ -40,10 +41,15 @@ export class SectionComponent implements OnInit, OnDestroy {
             .GetItemsByUri('TenTvAppFront/sectionBy/' + this._currentId + '?%24orderby=DisplayOrder%20desc')
             .subscribe((data) => {
                 this.item = data;
+                this.SendData();
             });
     }
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
+    }
+
+    public SendData() {
+        this.nanaRouter.SendSection(this.item);
     }
     private setConcreteComponents() {
         this.incomeData = {

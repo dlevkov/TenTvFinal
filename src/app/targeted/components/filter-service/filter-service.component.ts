@@ -1,3 +1,4 @@
+import { confirmationAnimation, visibilityChanged } from '../../../animations';
 import { Constants } from '../../../common/Constants';
 import { Cookies } from '../../../common/Cookies';
 import { FilterServiceModel } from '../../../common/models/filter-service.model';
@@ -24,28 +25,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
     selector: 'filter-service',
     templateUrl: 'filter-service.component.html',
-    animations: [
-        trigger('visibilityChanged', [
-            state('shown', style({
-                opacity: 1,
-                transform: 'translateY(0)'
-            })),
-            state('hidden', style({
-                opacity: 0,
-                transform: 'translateY(-100%)'
-            })),
-            transition('shown => hidden', animate('400ms')),
-            transition('hidden => shown', animate('300ms'))
-        ]),
-        trigger(
-            'confirmationAnimation', [
-                transition(':enter', [
-                    style({ transform: 'translateY(-100%)', opacity: 0.5 }),
-                    animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
-                ])
-            ]
-        )
-    ]
+    animations: [visibilityChanged, confirmationAnimation]
 })
 export class FilterServiceComponent implements OnInit {
 
