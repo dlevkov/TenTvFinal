@@ -106,28 +106,30 @@ var nanaHelper = {
     minFontSize: 16,
     fontInterval: 2,
     currentLineHeight: 20,
-    getCssPropertyValue: function(cssProp) {
-        var currentSelector = document.querySelector(this.fontSelectors[1]);
+    getCssPropertyValue: function(selector,cssProp) {
+        var currentSelector = document.querySelector(selector);
+        if(currentSelector!=null){
         var currentSelectorStyle = window.getComputedStyle(currentSelector, null).getPropertyValue(cssProp);
         return currentSelectorStyle;
+        }else return this.currentFontSize;
     },
-    fontSelectors: ['.rsvp_article_inner_content p:not(.oedoopror)','.rsvp_article_inner_content strong', '.rsvp_article_body_h1', '.rsvp_article_body_h2', '.rsvp_feed_item_title', '.rsvp_article_inner_content span'],
+    fontSelectors: ['.rsvp_article_inner_content p:not(.oedoopror)','.rsvp_article_inner_content strong', '.rsvp_article_body_h1', '.rsvp_article_body_h2', '.rsvp_feed_item_title', '.rsvp_article_inner_content span','.rsvp_article_inner_content a'],
 
     changeFontSize: function(zoomin) {
-        this.currentFontSize = parseInt(this.getCssPropertyValue('font-size'));
-        this.currentLineHeight = parseInt(this.getCssPropertyValue('font-size'));
-        console.log('currentFontSize', this.currentFontSize)
+        this.currentFontSize = parseInt(this.getCssPropertyValue(this.fontSelectors[0],'font-size'));
         if ((this.currentFontSize >= this.maxFontSize && zoomin) || (this.currentFontSize <= this.minFontSize && !zoomin))
             return false;
         var zoomI = zoomin ? 1 : -1;
-        this.currentFontSize += (this.fontInterval * zoomI);
+        this.currentLineHeight += (this.fontInterval * zoomI);
         this.lineHeight += (this.fontInterval * zoomI);
         for (var key in this.fontSelectors) {
             var selectors = document.querySelectorAll(this.fontSelectors[key]);
             selectors.forEach(function(selector) {
                 if (selector) {
-                    selector.style.fontSize = this.currentFontSize + 'px';
-                    selector.style.lineHeight = this.currentLineHeight + 'px';
+                   selector.style.fontSize = (parseInt(this.getCssPropertyValue(this.fontSelectors[key],'font-size')) + (this.fontInterval * zoomI)) +"px";              
+                   if(parseInt(this.getCssPropertyValue(this.fontSelectors[key],'line-height')) !== this.currentLineHeight && ((parseInt(selector.style.lineHeight, 10) !== (this.currentLineHeight))||isNaN(parseInt(selector.style.lineHeight, 10)))){
+                        selector.style.lineHeight = this.currentLineHeight +"px";                        
+                   }
                 }
             }, this);
         }
