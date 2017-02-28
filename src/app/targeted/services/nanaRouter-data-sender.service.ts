@@ -26,7 +26,7 @@ export class NanaRouterDataSenderService {
     }
 
     public SendSection(sectionModel: SectionModel) {
-        NanaRouterDataSenderService._nanaRouteRef.invokeRouteEvent('/section/' + sectionModel.SectionID, true, false, false, null, false);
+        NanaRouterDataSenderService._nanaRouteRef.invokeRouteEvent('/section/' + sectionModel.SectionID, false, true, false, null, false);
     }
 }
 
