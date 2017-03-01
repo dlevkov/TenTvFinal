@@ -189,10 +189,12 @@ var nanaHelper = {
     for (var key in this.fontSelectors) {
       var selectors = document.querySelectorAll(this.fontSelectors[key]);
       if (typeof selectors !== undefined && selectors) {
+         var preLineHeight = parseInt(this.getCssPropertyValue(this.fontSelectors[key], 'line-height'));
         for (var i = 0; i < selectors.length; i++) {
           if (typeof selectors[i] !== undefined && selectors[i]) {
             selectors[i].style.fontSize = (parseInt(this.getCssPropertyValue(this.fontSelectors[key], 'font-size')) + (this.fontInterval * zoomI)) + "px";
-            if (parseInt(this.getCssPropertyValue(this.fontSelectors[key], 'line-height')) !== this.currentLineHeight && ((parseInt(selectors[i].style.lineHeight, 10) !== (this.currentLineHeight)) || isNaN(parseInt(selectors[i].style.lineHeight, 10)))) {
+            if (preLineHeight !== this.currentLineHeight 
+                && ((parseInt(selectors[i].style.lineHeight, 10) !== (this.currentLineHeight)) || isNaN(parseInt(selectors[i].style.lineHeight, 10)))) {
               selectors[i].style.lineHeight = this.currentLineHeight + "px";
             }
           }
