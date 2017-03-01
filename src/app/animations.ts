@@ -16,10 +16,12 @@ export const pageTransition =
 export const visibilityChanged = trigger('visibilityChanged', [
     state('shown', style({
         opacity: 1,
+        display: 'block',
         transform: 'translateY(0)'
     })),
     state('hidden', style({
         opacity: 0,
+        display: 'none',
         transform: 'translateY(-100%)'
     })),
     transition('shown => hidden', animate('400ms')),
