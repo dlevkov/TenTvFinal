@@ -16,7 +16,7 @@ export class TwitterComponent implements INanaRouteProvider, OnInit {
     public SendData() {
         this.nanaRouter.SendTwitter();
     }
-    public ngOnInit(){
+    public ngOnInit() {
         this.SendData();
     }
 }
