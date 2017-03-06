@@ -38,7 +38,7 @@ export class SectionComponent implements OnInit, OnDestroy, INanaRouteProvider {
 
     public getItems() {
         this._subscriber = this._service
-            .GetItemsByUri('TenTvAppFront/sectionBy/' + this._currentId + '?%24orderby=DisplayOrder%20desc')
+            .GetItemsByUri('TenTvAppFront/sectionBy/' + this._currentId + '?%24top=100&%24orderby=%20ModifyDate%20desc')
             .subscribe((data) => {
                 this.item = data;
                 this.SendData();
