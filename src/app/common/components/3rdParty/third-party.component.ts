@@ -1,13 +1,13 @@
-import { Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'third-party',
     template: '<div></div>'
 })
-export class ThirdPartyComponent {
+export class ThirdPartyComponent implements AfterViewInit {
     constructor(private myElement: ElementRef) { }
 
-    ngAfterViewInit() {
+    public ngAfterViewInit() {
         // let instagram = document.createElement('script');
         // instagram.type = 'text/javascript';
         // instagram.src = 'http://platform.instagram.com/en_US/embeds.js';
@@ -17,9 +17,14 @@ export class ThirdPartyComponent {
         twitter.type = 'text/javascript';
         twitter.src = 'http://platform.twitter.com/widgets.js';
         this.myElement.nativeElement.appendChild(twitter);
+
+        let playbuzz = document.createElement('script');
+        playbuzz.type = 'text/javascript';
+        playbuzz.src = 'http://cdn.playbuzz.com/widget/feed.js';
+        this.myElement.nativeElement.appendChild(playbuzz);
     }
 
-// If you have html string that contains script tags insert it this way:
-//     const fragment = document.createRange().createContextualFragment(yourHtmlString);
-//     anyElement.appendChild(fragment);
+    // If you have html string that contains script tags insert it this way:
+    //     const fragment = document.createRange().createContextualFragment(yourHtmlString);
+    //     anyElement.appendChild(fragment);
 }
