@@ -19,7 +19,6 @@ import { HtmlContentParser } from '../../../common/HtmlContentParser';
 })
 
 export class ParagraphComponent implements OnInit {
-    public parser: any = window['contentParser'];
     @Input() public item: ParagraphModel;
     @Input() public index: number;
     private _loadingUrl: string = Constants.IMAGE_LOADING_URL16_9;
@@ -33,7 +32,7 @@ export class ParagraphComponent implements OnInit {
         this._loadingUrl = this.item.ImageSrc;
         this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.parserTs.contentHref(this.HTMLEncode(this.item.ParagraphContent)));
         //this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.HTMLEncode(this.item.ParagraphContent));
-        this.parserTs.contentScript(this.HTMLEncode(this.item.ParagraphContent));
+       // this.parserTs.contentScript(this.HTMLEncode(this.item.ParagraphContent));
     }
 
     public HTMLEncode(str) {
