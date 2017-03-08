@@ -48,7 +48,7 @@ export class ArticleComponent implements OnDestroy, OnInit, INanaRouteProvider {
         this._routeSubscriber = this.route.params
             .subscribe((x) => {
                 this._currentId = +x['id'];
-                this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId)
+                this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId + '?%24orderby=DisplayOrder%20asc')
                     .subscribe((data) => {
                         this.item = data;
                         this.parserTs.length = this.item.Paragraphs.length;
@@ -58,7 +58,6 @@ export class ArticleComponent implements OnDestroy, OnInit, INanaRouteProvider {
                     });
             });
     }
-
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
         this._routeSubscriber.unsubscribe();
