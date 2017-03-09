@@ -10,12 +10,21 @@ export class TwitterModel {
 
     constructor(data) {
         this.Title = data.Title;
-        this.TitleTrimed = data.TitleTrimed;
+        this.TitleTrimed = this.HTMLEncode(data.TitleTrimed);
         this.TimeStamp = new Date(data.TimeStamp);
         this.Id = data.Id;
         this.Author = data.Author;
         this.Link = data.link;
         this.TimeBefore = data.TimeBefore;
         this.CounterId = data.CounterId;
+    }
+    private HTMLEncode(str: string): string {
+        return str
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+
     }
 }
