@@ -15,12 +15,13 @@ export class VideoService {
 
     public GetItemsByUri(uri: string) {
         return this._dal.GetItemsByUri(uri)
-            .map(data => {
+            .map((data) => {
                 let item: VideoModel;
                 if (data) {
                     item = new VideoModel(data[0]);
                 }
                 return item;
-            });
+            })
+            .catch(this._dal.handleError);
     }
 }

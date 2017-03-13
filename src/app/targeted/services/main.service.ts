@@ -15,12 +15,11 @@ export class MainService {
         this._dal = new Dal(http);
     }
 
-   public  GetItemsByUri(uri: string) {
-        ;
+    public GetItemsByUri(uri: string) {
         return this._dal.GetItemsByUri(uri)
             .map((data) => {
                 return new MainModel(data);
             })
-             .catch(this._dal.handleError);
+            .catch(this._dal.handleError);
     }
 }
