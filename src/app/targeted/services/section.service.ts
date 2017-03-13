@@ -5,6 +5,7 @@ import { Constants } from '../../common/Constants';
 import { SectionModel } from '../models/section.model';
 import { Dal } from '../../common/services/dal.service';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class SectionService {
@@ -16,8 +17,9 @@ export class SectionService {
 
     public GetItemsByUri(uri: string) {
         return this._dal.GetItemsByUri(uri)
-            .map(data => {
+            .map((data) => {
                 return new SectionModel(data);
-            });
+            })
+            .catch(this._dal.handleError);
     }
 }

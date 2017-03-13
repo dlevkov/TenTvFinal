@@ -5,6 +5,7 @@ import { Constants } from '../../common/Constants';
 import { ArticleModel } from '../models/article.model';
 import { Dal } from '../../common/services/dal.service';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ArticleService {
@@ -16,8 +17,9 @@ export class ArticleService {
 
     public GetItemsByUri(uri: string): Observable<ArticleModel> {
         return this._dal.GetItemsByUri(uri)
-            .map(data => {
+            .map((data) => {
                 return new ArticleModel(data);
-            });
+            })
+            .catch(this._dal.handleError);
     }
 }

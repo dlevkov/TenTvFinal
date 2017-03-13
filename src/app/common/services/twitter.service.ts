@@ -6,6 +6,8 @@ import { TwitterModel } from '../models/twitter.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap'; // is flatMap
 import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class TwitterService {
     private _dal: Dal;
@@ -28,11 +30,12 @@ export class TwitterService {
                     });
                 }
                 return result;
-            });
+            })
+            .catch(this._dal.handleError);
     }
     public getTwitts() {
         return this._dal.GetItemsByUri('TenTvAppFront/Twitts')
-           .map((items) => {
+            .map((items) => {
                 let result: TwitterModel[] = [];
                 let counter = 0;
                 if (items) {
@@ -43,6 +46,7 @@ export class TwitterService {
                     });
                 }
                 return result;
-            });
+            })
+            .catch(this._dal.handleError);
     }
 }
