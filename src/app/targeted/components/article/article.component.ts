@@ -51,7 +51,8 @@ export class ArticleComponent implements OnDestroy, OnInit, INanaRouteProvider {
                 this._subscriber = this._service.GetItemsByUri('TenTvAppFront/article/' + this._currentId + '?%24orderby=DisplayOrder%20asc')
                     .subscribe((data) => {
                         this.item = data;
-                        this.parserTs.length = this.item.Paragraphs.length;
+                        this.parserTs.reset();
+                        this.parserTs.setLength(this.item.Paragraphs.length);
                         this._loadingUrl = this.item.TitlePic;
                         this.ScrollToTop();
                         this.SendData();
