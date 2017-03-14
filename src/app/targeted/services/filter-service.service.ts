@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Dal } from '../../common/services/dal.service';
 import { FilterServiceModel } from '../../common/models/filter-service.model';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class FilterServiceService {
@@ -26,6 +27,7 @@ export class FilterServiceService {
                     });
                 }
                 return result;
-            });
+            })
+             .catch(this._dal.handleError);
     }
 }

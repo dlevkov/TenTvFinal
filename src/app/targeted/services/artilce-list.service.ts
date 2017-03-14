@@ -5,6 +5,8 @@ import { Constants } from '../../common/Constants';
 import { ArticleListModel } from '../../targeted/models/article-list.model';
 import { Dal } from '../../common/services/dal.service';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class ArticleListService {
     private _dal: Dal;
@@ -24,6 +26,7 @@ export class ArticleListService {
                     });
                 }
                 return items;
-            });
+            })
+            .catch(this._dal.handleError);
     }
 }

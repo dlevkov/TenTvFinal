@@ -4,6 +4,9 @@ import { Constants } from '../Constants';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+
 
 export class Dal {
     private _dataDomain: string = Constants.DATA_DOMAIN;
@@ -21,9 +24,6 @@ export class Dal {
             .catch(this.handleError);
     }
     public handleError(error: Response) {
-
-        console.error(error);
-        // window.location.href = '/main';
         return Observable.throw(error || 'Server error');
     }
 }

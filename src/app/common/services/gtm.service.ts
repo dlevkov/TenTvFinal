@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Dal } from '../services/dal.service';
 import { GtmModel } from '../models/gtm.model';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GtmService {
@@ -13,7 +14,7 @@ export class GtmService {
         this._dal = new Dal(http);
     }
 
-    getGtmData(urlParams): Observable<GtmModel> {
+    public getGtmData(urlParams): Observable<GtmModel> {
         return this._dal.GetItemsByUri('TenTvAppFront/google-manager' + urlParams)
             .map((items) => {
                 let result: GtmModel;
@@ -21,7 +22,8 @@ export class GtmService {
                     result = new GtmModel(items);
                 }
                 return result;
-            });
+            })
+           .catch(this._dal.handleError);
     }
 }
 
