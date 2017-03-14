@@ -159,5 +159,12 @@
   "engines": {
     "node": ">= 4.2.1",
     "npm": ">= 3"
-  }
+  },
+   "extensionDependencies": [
+      "danwahlin.angular2-snippets",
+      "HookyQR.beautify",
+      "spywhere.guides",
+      "christian-kohler.path-intellisense",
+      "rbbit.typescript-hero"
+  ]
 }
