@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Sanitizer } from '@angular/core';
+import { Component, OnInit, Input, Sanitizer, ChangeDetectorRef} from '@angular/core';
 import { Http } from '@angular/http';
 import { ParagraphModel } from '../../models/paragraph.model';
 import { Constants } from '../../../common/Constants';
@@ -24,7 +24,7 @@ export class ParagraphComponent implements OnInit {
     private _loadingUrl: string = Constants.IMAGE_LOADING_URL16_9;
     private safeHtml: SafeHtml;
 
-    constructor(private _sanitizer: DomSanitizer, private parserTs: HtmlContentParser) {
+    constructor(private _sanitizer: DomSanitizer, private parserTs: HtmlContentParser, private cdr: ChangeDetectorRef) {
 
     }
 

@@ -1,11 +1,10 @@
-import { CompileTypeSummary } from '@angular/compiler';
+import { _switch } from 'rxjs/operator/switch';
 import { Injectable } from '@angular/core';
 import { Constants } from './Constants';
 
 @Injectable()
 export class HtmlContentParser {
   public scriptList: any[] = [];
-  public parser: any = window['contentParser'];
   public count: number = 0;
   private length: number = 0;
 
@@ -90,6 +89,7 @@ export class HtmlContentParser {
 
       if (elem1 !== undefined) {
         if (this.indexOf(elem1) === -1) {
+          elem1.setAttribute('class', 'third-party');
           this.scriptList.push(elem1);
         }
       }
@@ -105,16 +105,31 @@ export class HtmlContentParser {
 
   public indexOf(elem) {
     for (let i = 0; i < this.scriptList.length; i++) {
-        if (this.scriptList[i].src === elem.src) {
-            return i;
-        }
+      if (this.scriptList[i].src === elem.src) {
+        return i;
+      }
     }
     return -1;
   }
 
   public appendToDom() {
     this.scriptList.forEach((item) => {
-        this.parser.appendToDom(item);
-      });
+      let rr = document.querySelectorAll('script[class="third-party"]');
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < rr.length; i++) {
+        rr[i].parentNode.removeChild(rr[i]);
+      }
+      let obj = Constants.ThirdPartyScripts(item.src);
+      if (obj !== false) {
+        this.deleteWindowProperty(obj);
+      }
+      document.getElementsByTagName('head')[0].appendChild(item);
+    });
   }
+
+  private deleteWindowProperty(obj) {
+      window[obj] = null;
+  }
+
+
 }
