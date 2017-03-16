@@ -37,6 +37,7 @@ export class MainComponent implements OnInit, OnDestroy, INanaRouteProvider {
     public inboardData: any;
     public stripData: any;
 
+    private _routeSubscriber: Subscription;
     private _cookie: Cookies;
 
     constructor(public http: Http, public _ngZone: NgZone, public route: ActivatedRoute, cookieService: CookieService, private nanaRouter: NanaRouterDataSenderService) {
@@ -54,14 +55,16 @@ export class MainComponent implements OnInit, OnDestroy, INanaRouteProvider {
     }
 
     public ngOnInit() {
-        let data: string = this.route.snapshot.params['data']; // get list of id's as a string splited by ','
-        if (typeof data !== 'undefined' && data) {
-            this.isFiltered = true;
-        }
-        this.getItems();
-        this.addCounter();
-        if (!this.isInArticle) this.initFilter();
+        this._routeSubscriber = this.route.params
+            .subscribe(() => {
+                if (!this.isInArticle) this.initFilter();
+                this.getItems();
+                this.addCounter();
+            });
+
         this.state = (this.state === 'in' ? 'out' : 'in');
+        this.SendData(); // send data object to outer space
+
     }
 
     public isSafary() {
@@ -80,14 +83,14 @@ export class MainComponent implements OnInit, OnDestroy, INanaRouteProvider {
 
     public ngOnDestroy() {
         this._subscriber.unsubscribe();
+        this._routeSubscriber.unsubscribe();
         window['AdUnitsCollectionIndex'].reset();
     }
 
     public initFilter() {
         let ids: number[] = this._cookie.getNanaCookie();
-        console.log(ids);
+        console.log('filter init from main: ' + ids);
         this.isFiltered = (((ids.length > 0 && ids.length !== FilterServiceComponent.filterServices.length) && ids[0] !== 0) ? true : false);
-        this.SendData();
     }
 
     public handleFilter() {
@@ -112,12 +115,8 @@ export class MainComponent implements OnInit, OnDestroy, INanaRouteProvider {
         };
         setTimeout(() => {
             window['AdUnitsCollectionIndex'].init();
-            console.log('internal init');
             DfpUnitManager.ResetCounters();
-
         }, 5000);
-        console.log('external init');
-
     }
 
     public SendData() {

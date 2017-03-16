@@ -32,7 +32,9 @@ export class WebApiErrorLogger implements OnDestroy {
             });
     }
     public ngOnDestroy() {
-        this._subscriber.unsubscribe();
+        if (this._subscriber) {
+            this._subscriber.unsubscribe();
+        }
     }
     private convertResponseToJsonMessage(message) {
 

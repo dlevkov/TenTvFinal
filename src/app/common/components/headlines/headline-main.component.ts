@@ -51,10 +51,11 @@ export class HeadlineMainComponent implements OnInit, OnDestroy {
     get loadingUrl() {
         return this._baseModel.loadingUrl;
     }
-    private loadUrl() {
-        this._basic.loadUrl(this.item.MediaStockImageID, this._imageType);
-    }
     set loadingUrl(value: string) {
         this._baseModel.loadingUrl = value;
     }
+    private loadUrl() {
+        this._basic.loadUrl(this.item.MediaStockImageID, this._imageType);
+    }
+
 }

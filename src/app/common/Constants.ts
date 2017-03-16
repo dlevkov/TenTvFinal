@@ -109,8 +109,8 @@ export class Constants {
         dict[600443] = 13389;
         dict[600444] = 13414;
         dict[600447] = 13412;
-
-
+        dict[600468] = 13456; // shufersal
+        dict[600478] = 13468; // המרכז לפוריות הגבר
         return dict;
     }
 
