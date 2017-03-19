@@ -1,40 +1,30 @@
 <p align="center">
-  <a href="http://courses.angularclass.com/courses/angular-2-fundamentals?utm_source=github-angular2-webpack-starter&utm_medium=open-source&utm_campaign=webpackstarter" target="_blank">
-    <img width="438" alt="Angular 2 Fundamentals" src="https://cloud.githubusercontent.com/assets/1016365/17200649/085798c6-543c-11e6-8ad0-2484f0641624.png">
+  <a href="http://tentvapp.nana10.co.il" target="_blank">
+    <img width="438" alt="Angular 2 Fundamentals" src="https://lh3.googleusercontent.com/iu093E9c3hRyHcfJcHs2HUHOJ4_gAXVuHTgcasP-bZw6wAtBkrY9u_33WbZvft2SvEhc=h900-rw">
   </a>
 </p>
 
-___
-
-
-
-[![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
-[![Build Status](https://travis-ci.org/AngularClass/angular2-webpack-starter.svg?branch=master)](https://travis-ci.org/AngularClass/angular2-webpack-starter)
-[![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter)
-[![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
-[![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/angularclass/angular-2-webpack-starter)
+<h1 align="center">Channel 10 official apple\android app</h1>
+<br>
+<h2 align="center">built on top of</h2>
 
 <p align="center">
   <a href="https://angularclass.com" target="_blank">
     <img src="https://cloud.githubusercontent.com/assets/1016365/9863762/a84fed4a-5af7-11e5-9dde-d5da01e797e7.png" alt="Webpack and Angular 2" width="500" height="320"/>
   </a>
 </p>
+<hr>
 
-# Angular2 Webpack Starter [![Join Slack](https://img.shields.io/badge/slack-join-brightgreen.svg)](https://angularclass.com/slack-join) [![Join the chat at https://gitter.im/angularclass/angular2-webpack-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angularclass/angular2-webpack-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-
-> An Angular 2 starter kit featuring [Angular 2](https://angular.io) and [Angular 4](https://github.com/angular/angular/tree/4.0.0-beta.0) ([Ahead of Time Compile](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), [Router](https://angular.io/docs/ts/latest/guide/router.html), [Forms](https://angular.io/docs/ts/latest/guide/forms.html),
-[Http](https://angular.io/docs/ts/latest/guide/server-communication.html),
-[Services](https://gist.github.com/gdi2290/634101fec1671ee12b3e#_follow_@AngularClass_on_twitter),
-[Tests](https://angular.io/docs/ts/latest/guide/testing.html), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Material](https://github.com/angular/material2), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [Istanbul](https://github.com/gotwarlost/istanbul), [TypeScript](http://www.typescriptlang.org/), [@types](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwjgjdrR7u_NAhUQ7GMKHXgpC4EQFggnMAI&url=https%3A%2F%2Fwww.npmjs.com%2F~types&usg=AFQjCNG2PFhwEo88JKo12mrw_4d0w1oNiA&sig2=N69zbO0yN8ET7v4KVCUOKA), [TsLint](http://palantir.github.io/tslint/), [Codelyzer](https://github.com/mgechev/codelyzer), [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html), and [Webpack 2](http://webpack.github.io/) by [AngularClass](https://angularclass.com).
-
-> If you're looking for Angular 1.x please use [NG6-starter](https://github.com/angularclass/NG6-starter)
-> If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)
-> If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)
-> If you're looking for something easier to get started with then see the angular2-seed that I also maintain [angular/angular2-seed](https://github.com/AngularClass/angular2-seed)
-> If you're looking to add Angular 2 Material Design we have a branch [material2](https://github.com/AngularClass/angular2-webpack-starter/tree/material2)
-
+# Summary
+### Built as internal part of mobile applications, **not as independent product**
+<p align="center">
+ <img width="300"  src="https://lh3.googleusercontent.com/XamEoVIMRBolOgvBBrC8hNXbhPFq10qucqZ7oWfELOr4VHbcVXsyoMC_f-p6wW6RBiY=h900-rw">
+ <img width="300"  src="https://lh3.googleusercontent.com/e09eIjViue0P-Um_D73qjuiwZGsUsk_dANZjwHc3qwTrB2QxgIAxnrD3M6MteM1kx4k=h900-rw">
+ <img width="300"  src="https://lh3.googleusercontent.com/7b52HjA5mhhEKJonPDY4rA36Bmpi-FVfdY5by-gDsN9X0jpZpyE4PadjPpNackRt6Rhv=h900-rw">
+ <img width="300"  src="https://lh3.googleusercontent.com/8AgK73bppDTVdhNTwvwV5LQoQ7IoofRxEU1v4KsDBAv4OIDOSvDwseKCR4iiQ2eoDbxT=h900-rw">
+ </p>
+ 
+ 
 This seed repo serves as an Angular 2 starter for anyone looking to get up and running with Angular 2 and TypeScript fast. Using a [Webpack 2](http://webpack.github.io/) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
 * Best practices in file and application organization for Angular 2.
 * Ready to go build system using Webpack for working with TypeScript.
