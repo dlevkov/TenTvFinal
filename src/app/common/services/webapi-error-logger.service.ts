@@ -48,9 +48,10 @@ export class WebApiErrorLogger implements OnDestroy {
             statusCode: message.status || null,
             severity: 'Error' || null,
             type: 'Error',
-            url: message.url,
+            url: message.url || window['location'].href,
             cookies: message.headers
         };
+        console.log('outcome error:', obj);
         return obj;
     }
 }
