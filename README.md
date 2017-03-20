@@ -82,7 +82,7 @@ go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http
 
 ## Known problems
 * in case You getting 
-**
+``` 
 TypeError: Cannot read property 'options' of undefined
     at new WebpackChainModuleResolutionHostAdapter (D:\Angular2\TenTvApp\node_modules\src\webpack-chain-module-resolution-host-adapter.ts:12:119)
     at D:\Angular2\TenTvApp\node_modules\src\main.ts:19:46
@@ -100,11 +100,14 @@ TypeError: Cannot read property 'options' of undefined
     at startup (bootstrap_node.js:149:9)
     at bootstrap_node.js:509:3
 Compilation failed
-**
+```
 use this https://github.com/shlomiassaf/ngc-webpack/pull/12/commits/ca8481b6a8503eae1eee1cdd9467b477185b48d9
 
-Goto node_modules\ngc-webpack\src\webpack-chain-module-resolution-host-adapter.js
-and **add webpackWrapper.plugin &&**
+Goto **node_modules\ngc-webpack\src\webpack-chain-module-resolution-host-adapter.js**
+and add
+``` typescript
+webpackWrapper.plugin &&
+```
 
 ## File Structure
 We use the component approach in our starter. This is the new standard for developing Angular apps and a great way to ensure maintainable code by encapsulation of our behavior logic. A component is basically a self contained app usually in a single file or a folder with each concern as a file: style, template, specs, e2e, and component class. Here's how it looks:
