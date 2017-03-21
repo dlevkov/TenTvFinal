@@ -33,10 +33,6 @@ export class HeadlineModel {
     public isSmall: boolean = false;
     public isBig: boolean = false;
     public isAlert: boolean = false;
-    public isAd: boolean = false;
-    public isAdSecond: boolean = false;
-    public isPair: boolean = false;
-
 
     constructor(parameters) {
         this.DestArticleID = parameters.DestArticleID;
@@ -62,12 +58,9 @@ export class HeadlineModel {
         this.isSmall = !this.isTopFour && (this.HeadlineType === 'Small' || this.HeadlineType === 'Video');
         this.isBig = !this.isMain && (this.HeadlineType === 'Big' || this.isTopFour);
         this.isAlert = !this.isTopFour && this.HeadlineType === 'Alert';
-        this.isAd = !this.isTopFour && this.HeadlineType === 'Ad' && !this.AdsSecond;
-        this.isAdSecond = !this.isTopFour && this.HeadlineType === 'Ad' && this.AdsSecond;
-        this.isPair = !this.isTopFour && this.HeadlineType === 'Pair' && this.PairStart;
     }
 
-    public getClass(i: any): string {
+    public get currentClassType(): string {
         return this.HeadlineType;
     }
 
@@ -75,5 +68,13 @@ export class HeadlineModel {
         return Constants.HEADLINETYPES[this.DisplaySigns];
     }
 
-
+    get isAd(): boolean {
+        return !this.isTopFour && this.HeadlineType === 'Ad' && !this.AdsSecond;
+    }
+    get isAdSecond(): boolean {
+        return !this.isTopFour && this.HeadlineType === 'Ad' && this.AdsSecond;
+    }
+    get isPair(): boolean {
+        return !this.isTopFour && this.HeadlineType === 'Pair' && this.PairStart;
+    }
 }
