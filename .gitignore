@@ -4,6 +4,10 @@
 logs
 *.log
 
+# VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+
 # Runtime data
 pids
 *.pid
