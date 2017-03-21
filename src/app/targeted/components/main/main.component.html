@@ -1,6 +1,6 @@
 <div class="rsvp_fullwidth" style="margin-bottom: 100px;" [@transition]='state'>
   <dynamic-dfp-component *ngIf="!isInArticle" [componentData]="inboardData"></dynamic-dfp-component>
-  <div *ngFor="let headline of item?.Headlines; let i=index" [class]='headline.getClass(i)'>
+  <div *ngFor="let headline of item?.Headlines; let i=index" [class]='headline.currentClassType'>
     <headline-main [item]='headline' *ngIf="headline.isMain"></headline-main>
     <headline-big [item]='headline' *ngIf="headline.isBig && headline.isTopFour"></headline-big>
     <headline-alert [item]='headline' *ngIf="headline.isAlert" [countId]='item.AlertCounter'></headline-alert>
