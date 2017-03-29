@@ -117,14 +117,13 @@ export class Constants {
     public static ThirdPartyScripts(script: any): any {
     switch (script) {
         case 'http://platform.instagram.com/en_US/embeds.js':
-        console.log('instgrm');
           return 'instgrm';
         case 'http://cdn.playbuzz.com/widget/feed.js':
-        console.log('PlayBuzz');
           return 'PlayBuzz';
         case 'http://platform.twitter.com/widgets.js':
-        console.log('twttr');
           return 'twttr';
+        case 'http://static.apester.com/js/sdk/v2.0/apester-javascript-sdk.min.js':
+          return 'APESTER';
           default:
             return false ;
       }
